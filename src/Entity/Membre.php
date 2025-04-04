@@ -6,30 +6,40 @@ use App\Repository\MembreRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
-class Membre
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class Membre implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $role = null;
 
     #[ORM\ManyToMany(targetEntity: Projet::class, inversedBy: 'membres')]
     private Collection $projets;
 
     #[ORM\ManyToOne(targetEntity: Promo::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Promo $promo = null;
+
+    #[ORM\Column(unique: true)]
+    private ?string $email = null;
+
+    #[ORM\Column]
+    private string $password;
 
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: MessageProjet::class)]
     private Collection $messagesProjet;
@@ -180,4 +190,50 @@ class Membre
 
         return $this;
     }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_' . strtoupper($this->role ?? 'USER')];
+    }
+
+
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Si des données temporaires liées à l'utilisateur sont stockées, les effacer ici
+    }
+
 }
