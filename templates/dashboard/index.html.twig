@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Liste des membres</h1>
+    <ul>
+        {% for membre in membres %}
+            <li>{{ membre.prenom }} {{ membre.nom }} ({{ membre.role }})</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Liste des projets</h1>
+    <ul>
+        {% for projet in projets %}
+            <li>
+                <strong>{{ projet.nom }}</strong><br>
+                {{ projet.description }}<br>
+                <em>Thème : {{ projet.theme }} | Type : {{ projet.type }}</em>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

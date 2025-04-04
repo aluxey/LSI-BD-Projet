@@ -18,7 +18,7 @@ class Evenement
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
