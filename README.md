@@ -29,7 +29,6 @@ Ce projet vise à développer une plateforme web destinée à une association é
 |------------------|------------------------------------|
 | Symfony (PHP)    | Back-end MVC et API REST           |
 | MySQL            | Base de données relationnelle      |
-| Vite.js          | Bundler JavaScript moderne         |
 | Bootstrap        | Interface responsive               |
 | Git / GitHub     | Versioning et collaboration        |
 
@@ -44,7 +43,6 @@ Ce projet vise à développer une plateforme web destinée à une association é
 - Node.js ≥ 18
 - Symfony CLI
 - MySQL ou MariaDB
-- [Vite](https://vitejs.dev)
 
 ### Étapes
 
