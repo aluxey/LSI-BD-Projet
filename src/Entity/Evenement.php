@@ -79,4 +79,11 @@ class Evenement
     {
         return $this->forumEvenement;
     }
+
+    public function setForumEvenement(?ForumEvenement $forumEvenement): static
+    {
+        $this->forumEvenement = $forumEvenement;
+        
+        return $this;
+    }
 }
