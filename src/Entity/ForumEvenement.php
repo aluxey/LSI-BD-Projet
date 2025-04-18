@@ -59,6 +59,13 @@ class ForumEvenement
         return $this->evenement;
     }
 
+    public function setEvenement(Evenement $evenement): static
+    {
+        $this->evenement = $evenement;
+
+        return $this;
+    }
+
     public function getMessagesEvenement(): Collection
     {
         return $this->messagesEvenement;
