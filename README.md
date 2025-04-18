@@ -50,5 +50,5 @@ Ce projet vise à développer une plateforme web destinée à une association é
 
 # 🗃️ Schéma de la Base de Données
 
-
+[Toutes les infos relatives à la création de la BDD et de son remplissage](/Docs/BDD.md)
 
