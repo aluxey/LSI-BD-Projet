@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
+    #[Route('/loginn', name: 'app_loginn')]
     public function index(): Response
     {
         $is_register = false;

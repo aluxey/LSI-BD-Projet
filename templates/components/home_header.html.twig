@@ -1,0 +1,48 @@
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
+    <div class="container p-4 md:py-6">
+        <nav class="flex items-center justify-between">
+            <a href="{{ path('app_home') }}" class="flex items-center space-x-3 group">
+                <div class="relative w-8 h-8 overflow-hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.0" class="h-8 w-8"
+                        viewBox="0 0 191.000000 191.000000" preserveAspectRatio="xMidYMid meet">
+
+                        <g transform="translate(0.000000,191.000000) scale(0.100000,-0.100000)" fill="#ffffff"
+                            stroke="none">
+                            <path
+                                d="M5 1898 c-3 -7 -4 -146 -3 -308 l3 -295 125 -1 c402 -2 440 -4 440 -17 0 -9 -31 -22 -82 -36 -122 -33 -200 -75 -284 -154 -164 -153 -231 -354 -191 -575 54 -293 316 -512 613 -512 113 0 173 14 279 65 189 91 292 228 355 473 12 45 30 57 30 20 1 -13 1 -143 0 -290 l-1 -268 311 0 311 0 -3 698 -4 697 -23 69 c-35 106 -77 173 -160 257 -60 60 -94 85 -161 117 -47 22 -107 46 -135 53 -76 19 -1413 25 -1420 7z m1285 -618 c6 -8 8 -21 5 -28 -3 -8 -5 -155 -5 -328 l0 -314 -329 0 c-182 0 -332 4 -335 8 -3 5 -6 157 -6 338 -2 309 -1 329 17 336 10 4 159 6 331 5 265 -2 314 -4 322 -17z" />
+                        </g>
+                    </svg>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 shimmer-effect">
+                    </div>
+                </div>
+                <span class="font-mono text-xl">assosquare</span>
+            </a>
+            {% if app.request.attributes.get('_route') == 'app_home' %}
+            <div class="hidden md:flex items-center gap-4 fade-in">
+                <a class="rounded-full border border-zinc-800 bg-black/20 backdrop-blur-sm text-sm px-6 py-2 h-auto hover:bg-zinc-800/50 transition-colors"
+                    href="{{ path('app_login') }}">
+                    Tu as déjà un compte ?
+                </a>
+            </div>
+            {% endif %}
+            <button class=" md:hidden menu-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-6 w-6">
+                    <line x1="4" x2="20" y1="12" y2="12"></line>
+                    <line x1="4" x2="20" y1="6" y2="6"></line>
+                    <line x1="4" x2="20" y1="18" y2="18"></line>
+                </svg>
+            </button>
+        </nav>
+    </div>
+    <div class="md:hidden bg-black/90 backdrop-blur-md mobile-menu hidden">
+        <div class="container py-4">
+            <button
+                class="w-full rounded-full border border-zinc-800 bg-black/20 backdrop-blur-sm text-sm px-6 py-2 h-auto hover:bg-zinc-800/50 transition-colors">
+                Backed by Y Combinator (hopefully soon)
+            </button>
+        </div>
+    </div>
+</header>
