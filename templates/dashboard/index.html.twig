@@ -1,23 +1,127 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard - Assosquare{% endblock %}
 
 {% block body %}
-    <h1>Liste des membres</h1>
-    <ul>
-        {% for membre in membres %}
-            <li>{{ membre.prenom }} {{ membre.nom }} ({{ membre.role }})</li>
-        {% endfor %}
-    </ul>
+<div class="min-h-screen bg-[#0B0C0E] text-white">
+    {% include 'components/header.html.twig' %}
 
-    <h1>Liste des projets</h1>
-    <ul>
-        {% for projet in projets %}
-            <li>
-                <strong>{{ projet.nom }}</strong><br>
-                {{ projet.description }}<br>
-                <em>Thème : {{ projet.theme }} | Type : {{ projet.type }}</em>
-            </li>
-        {% endfor %}
-    </ul>
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold gradient-text">Dashboard</h1>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                {% if is_granted('ROLE_ADMIN') %}
+                <button class="btn btn-secondary px-4 py-2">
+                    <i class="fas fa-users mr-2"></i> Gérer les membres
+                </button>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Colonne principale -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Calendrier -->
+                <div class="card p-6 fade-in">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">Calendrier des événements</h2>
+                        <div class="flex space-x-2">
+                            <button class="btn btn-primary px-3 py-1 text-sm">Nouvel événement</button>
+                        </div>
+                    </div>
+                    {% include 'dashboard/widgets/calendar.html.twig' %}
+
+                    <div class="mt-4 text-center">
+                        <a class="text-sm text-gray-400 hover:text-white" href="{{ path('app_events') }}">
+                            Voir tous les événements <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projets -->
+                <div class="card p-6 fade-in" style="animation-delay: 0.1s">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">Projets en cours</h2>
+                        <button class="btn btn-primary px-3 py-1 text-sm">
+                            <i class="fas fa-plus mr-1"></i> Nouveau projet
+                        </button>
+                    </div>
+                    {% include 'dashboard/widgets/projects.html.twig' %}
+
+                    <div class="mt-4 text-center">
+                        <a class="text-sm text-gray-400 hover:text-white" href="{{ path('app_projects') }}">
+                            Voir tous les projets <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colonne latérale -->
+            <div class="space-y-6">
+                <!-- Statistiques -->
+                <div class="card p-6 fade-in" style="animation-delay: 0.2s">
+                    <h2 class="text-xl font-semibold mb-4">Aperçu</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
+                            <p class="text-sm text-gray-400">Projets actifs</p>
+                            <p class="text-2xl font-bold">{{ projects|length }}</p>
+                        </div>
+                        <div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
+                            <p class="text-sm text-gray-400">Événements à venir</p>
+                            <p class="text-2xl font-bold">{{ upcomingEvents|length }}</p>
+                        </div>
+                        <div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
+                            <p class="text-sm text-gray-400">Tâches en attente</p>
+                            <p class="text-2xl font-bold">{{ pendingTasks|length }}</p>
+                        </div>
+                        <div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
+                            <p class="text-sm text-gray-400">Messages non lus</p>
+                            <p class="text-2xl font-bold">{{ unreadMessages|length }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forum -->
+                <div class="card p-6 fade-in" style="animation-delay: 0.3s">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">Forum interne</h2>
+                        <button class="btn btn-primary px-3 py-1 text-sm">
+                            <i class="fas fa-plus mr-1"></i> Nouveau forum
+                        </button>
+                    </div>
+                    {% include 'dashboard/widgets/forum.html.twig' %}
+
+                    <div class="mt-4 text-center">
+                        <a class="text-sm text-gray-400 hover:text-white" href="{{ path('app_forums') }}">
+                            Voir tous les forums <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Membres actifs -->
+                {% if is_granted('ROLE_ADMIN') %}
+                <div class="card p-6 fade-in" style="animation-delay: 0.4s">
+                    <h2 class="text-xl font-semibold mb-4">Membres actifs</h2>
+                    <ul class="space-y-3">
+                        {% for member in activeMembers %}
+                        <li class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center">
+                                {{ member.initials }}
+                            </div>
+                            <div>
+                                <p class="font-medium">{{ member.name }}</p>
+                                <p class="text-xs text-gray-400">{{ member.lastActive }}</p>
+                            </div>
+                            <div class="ml-auto">
+                                <span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+</div>
 {% endblock %}
