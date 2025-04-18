@@ -1,0 +1,87 @@
+<div id="createEventModal" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-gray-500/40 transition-opacity" aria-hidden="true"></div>
+
+    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div
+                class="relative transform overflow-hidden rounded-lg bg-black text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
+                <div class="px-4 pt-5 pb-4 card sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h2 class="font-semibold text-xl mb-5" id="modal-title">Créer un nouvel événement</h2>
+
+                            <form action="" method="post" class="space-y-4 text-white">
+                                <!-- Nom de l'événement -->
+                                <div class="space-y-2">
+                                    <label for="event-name" class="block text-sm text-zinc-400">Nom de
+                                        l'événement</label>
+                                    <input type="text" id="event-name" name="event_name" required
+                                        class="w-full px-2 py-1 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
+                                        placeholder="Nom de l'événement...">
+                                </div>
+
+                                <!-- Description -->
+                                <div class="space-y-2">
+                                    <label for="event-description"
+                                        class="block text-sm text-zinc-400">Description</label>
+                                    <textarea id="event-description" name="event_description" rows="3"
+                                        class="w-full px-2 py-1 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
+                                        placeholder="Décris ton événement..."></textarea>
+                                </div>
+
+                                <!-- Date -->
+                                <div class="space-y-2">
+                                    <label for="event-date" class="block text-sm text-zinc-400">Date</label>
+                                    <input type="date" id="event-date" name="event_date"
+                                        class="w-full px-2 py-1 bg-black/40 border border-zinc-800 rounded-md text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all">
+                                </div>
+
+                                <!-- Heures -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+                                    <div class="space-y-2">
+                                        <label for="start-time" class="block text-sm text-zinc-400">Heure de
+                                            début</label>
+                                        <input type="time" id="start-time" name="start_time"
+                                            class="w-full px-2 py-1 bg-black/40 border border-zinc-800 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all">
+                                    </div>
+
+                                    <div class="space-y-2">
+                                        <label for="end-time" class="block text-sm text-zinc-400">Heure de fin</label>
+                                        <input type="time" id="end-time" name="end_time"
+                                            class="w-full px-2 py-1 bg-black/40 border border-zinc-800 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all">
+                                    </div>
+                                </div>
+
+                                <!-- Toute la journée -->
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" id="all-day" name="all_day"
+                                        class="accent-[#8564FA] bg-black/40 border border-zinc-800 rounded">
+                                    <label for="all-day" class="text-sm text-zinc-400">Toute la journée</label>
+                                </div>
+
+                                <!-- Projet associé -->
+                                <div class="space-y-2">
+                                    <label for="project-select" class="block text-sm text-zinc-400">Associer à un
+                                        projet</label>
+                                    <select id="project-select" name="project_id"
+                                        class="w-full px-2 py-1 bg-black/40 border border-zinc-800 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all">
+                                        <option value="">-- Sélectionne un projet --</option>
+                                        <option value="1">Projet Alpha</option>
+                                        <option value="2">Projet Beta</option>
+                                        <option value="3">Projet Gamma</option>
+                                        <!-- À générer dynamiquement avec Twig -->
+                                    </select>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="px-4 py-3 sm:flex space-x-2 justify-end bg-[rgba(24,24,27,0.7)]">
+                    <button type="button" class="btn btn-secondary px-4 py-2" onclick="toggleModal()">Annuler</button>
+                    <button type="button" class="btn btn-primary px-4 py-2">Créer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

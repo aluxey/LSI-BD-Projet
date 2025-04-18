@@ -29,4 +29,7 @@
 /public/build/
 npm-debug.log
 yarn-error.log
-###< symfony/webpack-encore-bundle ###
+/templates/components
+
+.history/
+.lh/

@@ -3,8 +3,13 @@
         "@babel/core": "^7.26.10",
         "@babel/preset-env": "^7.16.0",
         "@symfony/webpack-encore": "^5.1.0",
+        "@tailwindcss/postcss": "^4.1.4",
+        "autoprefixer": "^10.4.21",
         "core-js": "^3.38.0",
+        "postcss": "^8.5.3",
+        "postcss-import": "^16.1.0",
         "regenerator-runtime": "^0.13.9",
+        "tailwindcss": "^4.1.4",
         "webpack": "^5.74.0",
         "webpack-cli": "^5.1.0",
         "webpack-notifier": "^1.15.0"
@@ -19,9 +24,8 @@
     },
     "dependencies": {
         "@symfony/stimulus-bundle": "^2.23.0",
-        "@tailwindcss/postcss": "^4.1.2",
-        "postcss": "^8.5.3",
+        "composer": "^4.1.0",
         "postcss-loader": "^8.1.1",
-        "tailwindcss": "^4.1.2"
+        "symfony": "^0.0.1"
     }
 }
