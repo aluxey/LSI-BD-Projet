@@ -83,3 +83,69 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Tab switching
+    const tabs = document.querySelectorAll('.auth-tab');
+    const forms = document.querySelectorAll('.auth-form');
+    const toggleButtons = document.querySelectorAll('.auth-toggle');
+    
+    function showForm(formId) {
+        // Hide all forms
+        forms.forEach(form => {
+            form.classList.add('hidden');
+        });
+        
+        // Show the target form
+        const targetForm = document.getElementById(formId);
+        if (targetForm) {
+            targetForm.classList.remove('hidden');
+        }
+        
+        // Update active tab
+        tabs.forEach(tab => {
+            if (tab.dataset.target === formId) {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        });
+    }
+    
+    // Tab click handlers
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            showForm(this.dataset.target);
+        });
+    });
+    
+    // Toggle button handlers
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            showForm(this.dataset.show);
+        });
+    });
+    
+    // Form validation
+    const registerForm = document.querySelector('#register-form form');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Check password length
+            if (password.length < 8) {
+                e.preventDefault();
+                alert('Password must be at least 8 characters long');
+                return;
+            }
+            
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match');
+                return;
+            }
+        });
+    }
+});
