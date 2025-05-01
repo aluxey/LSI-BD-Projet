@@ -1,106 +1,114 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Projet Graphyn - Graphyn{% endblock %}
+{% block title %}Projet Graphyn - Graphyn
+{% endblock %}
 
 {% block body %}
-<div class="min-h-screen bg-[#0B0C0E] text-white">
-    {% include 'components/header.html.twig' %}
-    <main class="container mx-auto px-24 py-8">
-        <div class="mb-6">
-            <a href="/projects" class="text-gray-400 hover:text-white flex items-center">
-                <i class="fas fa-arrow-left mr-2"></i> Retour à la liste des projets
-            </a>
-        </div>
-        
-        <div class="card p-6 fade-in">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-[var(--border)] pb-4">
-                <h1 class="text-2xl md:text-3xl font-bold gradient-text mb-4 md:mb-0">Nom du projet</h1>
-                
-                <div class="flex space-x-3">
-                    <a onclick="toggleModal('editProjectModal')" class="btn btn-primary px-4 py-2">
-                        <i class="fas fa-edit mr-2"></i> Modifier
-                    </a>
-                    <button type="button" class="btn btn-secondary px-4 py-2" 
-                            onclick="if(confirm('Êtes-vous sûr de vouloir supprimer ce projet?')) { document.getElementById('delete-form').submit(); }">
-                        <i class="fas fa-trash-alt mr-2"></i> Supprimer
-                    </button>
-                    
-                    <form id="delete-form" action="/project/delete/1" method="post" style="display: none;">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="TOKEN_FICTIF_SUPPRESSION">
-                    </form>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold mb-4">Description</h2>
-                        <div class="text-gray-300">
-                            <p>Ce projet a pour objectif de créer une plateforme de visualisation de graphes interactive et responsive, nommée Graphyn.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold mb-4">Progression</h2>
-                        <div class="mb-2">
-                            <div class="flex justify-between text-sm mb-1">
-                                <span>Avancement global</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="w-full bg-[rgba(24,24,27,0.9)] rounded-full h-3">
-                                <div class="bg-[var(--primary)] h-3 rounded-full" style="width: 75%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="space-y-6">
-                    <div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold mb-4">Membres</h2>
-                        <ul class="space-y-3">
-                            <li class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
-                                    JD
-                                </div>
-                                <div>
-                                    <p class="font-medium">Jean Dupont</p>
-                                    <p class="text-xs text-gray-400">Développeur Backend</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
-                                    ML
-                                </div>
-                                <div>
-                                    <p class="font-medium">Marie Lopez</p>
-                                    <p class="text-xs text-gray-400">Designer UX/UI</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                                    OT
-                                </div>
-                                <div>
-                                    <p class="font-medium">Omar Traoré</p>
-                                    <p class="text-xs text-gray-400">Chef de projet</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</div>
+	<div class="min-h-screen bg-[#0B0C0E] text-white">
+		{% include 'components/header.html.twig' %}
+		<main class="container mx-auto px-24 py-8">
+			<div class="mb-6">
+				<a href="/projects" class="text-gray-400 hover:text-white flex items-center">
+					<i class="fas fa-arrow-left mr-2"></i>
+					Retour à la liste des projets
+				</a>
+			</div>
 
-{% include '/projects/modals/_create.html.twig' %}
-{% include '/projects/modals/_edit.html.twig' %}
+			<div class="card p-6 fade-in">
+				<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-[var(--border)] pb-4">
+					<h1 class="text-2xl md:text-3xl font-bold gradient-text mb-4 md:mb-0">Nom du projet</h1>
+
+					<div class="flex space-x-3">
+						<a onclick="toggleModal('createProjectEventModal')" class="btn btn-primary px-4 py-2">
+							<i class="fas fa-edit mr-2"></i>
+							Nouveau forum
+						</a>
+						<a onclick="toggleModal('editProjectModal')" class="btn btn-secondary px-4 py-2">
+							<i class="fas fa-edit mr-2"></i>
+							Modifier
+						</a>
+						<button type="button" class="btn btn-secondary px-4 py-2" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer ce projet?')) { document.getElementById('delete-form').submit(); }">
+							<i class="fas fa-trash-alt mr-2"></i>
+							Supprimer
+						</button>
+
+						<form id="delete-form" action="/project/delete/1" method="post" style="display: none;">
+							<input type="hidden" name="_method" value="DELETE">
+							<input type="hidden" name="_token" value="TOKEN_FICTIF_SUPPRESSION">
+						</form>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+					<div class="lg:col-span-2 space-y-6">
+						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
+							<h2 class="text-xl font-semibold mb-4">Description</h2>
+							<div class="text-gray-300">
+								<p>Ce projet a pour objectif de créer une plateforme de visualisation de graphes interactive et responsive, nommée Graphyn.</p>
+							</div>
+						</div>
+
+						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
+							<h2 class="text-xl font-semibold mb-4">Progression</h2>
+							<div class="mb-2">
+								<div class="flex justify-between text-sm mb-1">
+									<span>Avancement global</span>
+									<span>75%</span>
+								</div>
+								<div class="w-full bg-[rgba(24,24,27,0.9)] rounded-full h-3">
+									<div class="bg-[var(--primary)] h-3 rounded-full" style="width: 75%"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="space-y-6">
+						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
+							<h2 class="text-xl font-semibold mb-4">Membres</h2>
+							<ul class="space-y-3">
+								<li class="flex items-center space-x-3">
+									<div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
+										JD
+									</div>
+									<div>
+										<p class="font-medium">Jean Dupont</p>
+										<p class="text-xs text-gray-400">Développeur Backend</p>
+									</div>
+								</li>
+								<li class="flex items-center space-x-3">
+									<div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
+										ML
+									</div>
+									<div>
+										<p class="font-medium">Marie Lopez</p>
+										<p class="text-xs text-gray-400">Designer UX/UI</p>
+									</div>
+								</li>
+								<li class="flex items-center space-x-3">
+									<div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+										OT
+									</div>
+									<div>
+										<p class="font-medium">Omar Traoré</p>
+										<p class="text-xs text-gray-400">Chef de projet</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	{% include '/projects/modals/_create.html.twig' %}
+	{% include '/projects/modals/_edit.html.twig' %}
+	{% include '/projects/modals/_create-forum.html.twig' %}
 
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('dashboard.js') }}"></script>
+	{{ parent() }}
+	<script src="{{ asset('dashboard.js') }}"></script>
 
 {% endblock %}
