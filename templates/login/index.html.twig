@@ -152,4 +152,25 @@
     </section>
 
 </div>
+
+<script>
+    const toggles = document.querySelectorAll('.auth-toggle');
+    const tabs = document.querySelectorAll('.auth-tab');
+    const forms = document.querySelectorAll('.auth-form');
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const target = toggle.getAttribute('data-show');
+
+            // Active le bon onglet
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-target="${target}"]`)?.classList.add('active');
+
+            // Affiche le bon formulaire
+            forms.forEach(f => f.classList.add('hidden'));
+            document.getElementById(target)?.classList.remove('hidden');
+        });
+    });
+</script>
+
 {% endblock %}

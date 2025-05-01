@@ -51,7 +51,7 @@ class SecurityController extends AbstractController
                 // Connexion automatique (optionnel)
                 $security->login($user);
     
-                return $this->redirectToRoute('app_home');
+                return $this->redirectToRoute('home');
             } else {
                 $registerError = 'Please correct the errors in the form.';
             }

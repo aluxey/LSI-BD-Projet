@@ -6,47 +6,23 @@
 <div class="min-h-screen bg-[#0B0C0E] text-white">
     {% include 'components/home_header.html.twig' %}
 
-    {# Hero Section avec formulaire de login #}
+    {# Hero Section #}
     <section class="min-h-[80vh] flex flex-col items-center justify-center pt-16 px-4 md:px-0 stagger-children">
         <div class="container">
             <div class="max-w-[800px] p-8 mx-auto text-center space-y-6">
-                <h1 class="text-3xl md:text-[56px] leading-tight md:leading-[1.1] font-medium tracking-[-0.02em] fade-in">
+                <h1
+                    class="text-3xl md:text-[56px] leading-tight md:leading-[1.1] font-medium tracking-[-0.02em] fade-in">
                     Ton asso. Ta plateforme.
                 </h1>
                 <p class="text-zinc-400 text-base md:text-xl leading-relaxed max-w-[600px] mx-auto fade-in">
-                    Une plateforme moderne pour gérer facilement les membres, événements, projets et discussions de ton association.
+                    Une plateforme moderne pour gérer facilement les membres, événements, projets et discussions de ton
+                    association.
                 </p>
-
-                {# Formulaire de connexion #}
                 <div class="pt-8 fade-in">
-                    <form action="{{ path('app_login') }}" method="post" class="space-y-4 text-left max-w-md mx-auto">
-                        {% set error = error ?? null %}
-                        {% set last_username = last_username ?? '' %}
-                        {% if error %}
-                            <div class="text-red-500 text-sm text-center">
-                                {{ error.messageKey|trans(error.messageData, 'security') }}
-                            </div>
-                        {% endif %}
-
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-zinc-300">Email</label>
-                            <input type="email" id="email" name="_username" value="{{ last_username }}" required autofocus
-                                class="mt-1 block w-full bg-zinc-800 border border-zinc-700 rounded-md px-4 py-2 text-white">
-                        </div>
-
-                        <div>
-                            <label for="password" class="block text-sm font-medium text-zinc-300">Mot de passe</label>
-                            <input type="password" id="password" name="_password" required
-                                class="mt-1 block w-full bg-zinc-800 border border-zinc-700 rounded-md px-4 py-2 text-white">
-                        </div>
-
-                        <div>
-                            <button type="submit"
-                                class="w-full bg-[#8564FA] hover:bg-[#8564FA]/90 text-white rounded-full px-6 py-2">
-                                Se connecter
-                            </button>
-                        </div>
-                    </form>
+                    <a class="bg-[#8564FA] hover:bg-[#8564FA]/90 text-white rounded-full px-6 py-3 h-auto text-sm md:text-md scroll-to"
+                        href="{{ path('app_login') }}">
+                        Commencer maintenant
+                    </a>
                 </div>
             </div>
         </div>
@@ -56,7 +32,9 @@
     <section id="video-section" class="pt-4 -mt-16 md:-mt-24 px-4 md:px-0 fade-in-up">
         <div class="container">
             <div class="max-w-[1000px] mx-auto">
+                {# Browser Window Mockup #}
                 <div class="rounded-xl overflow-hidden bg-zinc-900/50 shadow-2xl border border-white/5">
+                    {# Browser Controls #}
                     <div class="flex items-center gap-2 px-4 py-3 bg-black/40 border-b border-white/5">
                         <div class="flex gap-1.5">
                             <div class="w-3 h-3 rounded-full bg-zinc-600"></div>
@@ -64,26 +42,34 @@
                             <div class="w-3 h-3 rounded-full bg-zinc-600"></div>
                         </div>
                         <div class="flex-1 mx-4">
-                            <div class="bg-black/40 rounded-md py-1.5 px-3 text-xs text-zinc-500 max-w-[300px] flex items-center gap-2">
+                            <div
+                                class="bg-black/40 rounded-md py-1.5 px-3 text-xs text-zinc-500 max-w-[300px] flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full bg-zinc-800"></div>
                                 graphyn.xyz
                             </div>
                         </div>
                     </div>
+
+                    {# Video/Content Area #}
                     <div class="aspect-[16/9] relative">
-                        <div class="absolute inset-0 flex items-center justify-center cursor-pointer group video-trigger">
-                            <div class="absolute inset-0"></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center cursor-pointer group video-trigger">
+                            <div class="absolute inset-0">
+                            </div>
                             <div class="play-button">
-                                <button class="relative z-10 size-16 md:size-20 rounded-full p-0 bg-black/20 hover:bg-black/30 transition-all duration-200 backdrop-blur-sm">
+                                <button
+                                    class="relative z-10 size-16 md:size-20 rounded-full p-0 bg-black/20 hover:bg-black/30 transition-all duration-200 backdrop-blur-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="size-6 md:size-8 text-white">
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="size-6 md:size-8 text-white">
                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                     </svg>
                                 </button>
                             </div>
                         </div>
-                        <div class="video-container hidden"></div>
+                        <div class="video-container hidden">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,7 +80,7 @@
     <footer class="py-8 mt-16 border-t border-white/5 fade-in">
         <div class="container">
             <div class="text-center text-sm text-zinc-400">
-                © {{ "now"|date("Y") }} Assosquare. Tous droits réservés.
+
             </div>
         </div>
     </footer>
