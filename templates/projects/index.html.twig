@@ -1,91 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Projets - Assosquare{% endblock %}
+{% block title %}Projets - Assosquare
+{% endblock %}
 
 {% block body %}
-<div class="min-h-screen bg-[#0B0C0E] text-white">
-    {% include 'components/header.html.twig' %}
-    <main class="container mx-auto px-24 py-8">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-3">
-            <h1 class="text-3xl font-bold gradient-text">Projets</h1>
-            <div class="flex space-x-4 mt-4 md:mt-0">
-                {% if is_granted('ROLE_ADMIN') %}
-                <button class="btn btn-secondary px-4 py-2">
-                    <i class="fas fa-users mr-2"></i> Gérer les membres
-                </button>
-                {% endif %}
-                <button class="btn btn-primary px-4 py-2" onclick="toggleModal('createProjectModal')">
-                    <i class="fas fa-users mr-2"></i> Nouveau projet
-                </button>
-            </div>
-        </div>
+	<div class="min-h-screen bg-[#0B0C0E] text-white">
+		{% include 'components/header.html.twig' %}
+		<main class="container mx-auto px-24 py-8">
+			<div class="flex flex-col md:flex-row justify-between items-center mb-3">
+				<h1 class="text-3xl font-bold gradient-text">Projets</h1>
+				<div class="flex space-x-4 mt-4 md:mt-0">
+					{% if is_granted('ROLE_ADMIN') %}
+						<button class="btn btn-secondary px-4 py-2">
+							<i class="fas fa-users mr-2"></i>
+							Gérer les membres
+						</button>
+					{% endif %}
+					<button class="btn btn-primary px-4 py-2" onclick="toggleModal('createProjectModal')">
+						<i class="fas fa-users mr-2"></i>
+						Nouveau projet
+					</button>
+				</div>
+			</div>
 
 
-        <div class="card p-6 fade-in" style="animation-delay: 0.1s">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">La liste de vos projets</h2>
-            </div>
-            
-            <div class="space-y-4">
-                <!-- Projet 1 -->
-                <div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <a href="/project/1">
-                                <h3 class="font-medium underline">Refonte du site web</h3>
-                                <p class="text-xs text-gray-400">Deadline: 22 Juin 2023</p>
-                            </a>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button class="text-gray-400 hover:text-white">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-gray-400 hover:text-white">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </div>
-                    </div>
-            
-                    <div class="mb-2">
-                        <div class="flex justify-between text-xs mb-1">
-                            <span>Progression</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="w-full bg-[rgba(24,24,27,0.9)] rounded-full h-2">
-                            <div class="bg-[var(--primary)] h-2 rounded-full" style="width: 75%"></div>
-                        </div>
-                    </div>
-            
-                    <div class="flex justify-between items-center">
-                        <div class="flex -space-x-2">
-                            <div
-                                class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                                JD</div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                                AL</div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                                MK</div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-[rgba(24,24,27,0.9)] text-gray-400 flex items-center justify-center text-xs border-2 border-[#0B0C0E]">
-                                +2</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<div class="card p-6 fade-in" style="animation-delay: 0.1s">
+				<div class="flex justify-between items-center mb-4">
+					<h2 class="text-xl font-semibold">La liste de vos projets</h2>
+				</div>
 
-        </div>
-    </main>
-</div>
+				<div
+					class="space-y-4">
+					<!-- Projet 1 -->
+					<div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
+						<div class="flex justify-between items-start mb-2">
+							<div>
+								<a href="/project/1">
+									<h3 class="font-medium underline">Refonte du site web</h3>
+									<p class="text-xs text-gray-400">Deadline: 22 Juin 2023</p>
+								</a>
+							</div>
+							<div class="flex space-x-2">
+								<button class="text-gray-400 hover:text-white">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button class="text-gray-400 hover:text-white">
+									<i class="fas fa-ellipsis-v"></i>
+								</button>
+							</div>
+						</div>
 
-{% include '/projects/modals/_create.html.twig' %}
+						<div class="mb-2">
+							<div class="flex justify-between text-xs mb-1">
+								<span>Progression</span>
+								<span>75%</span>
+							</div>
+							<div class="w-full bg-[rgba(24,24,27,0.9)] rounded-full h-2">
+								<div class="bg-[var(--primary)] h-2 rounded-full" style="width: 75%"></div>
+							</div>
+						</div>
+
+						<div class="flex justify-between items-center">
+							<div class="flex -space-x-2">
+								<div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center border-2 border-[#0B0C0E]">
+									JD</div>
+								<div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center border-2 border-[#0B0C0E]">
+									AL</div>
+								<div class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center border-2 border-[#0B0C0E]">
+									MK</div>
+								<div class="w-8 h-8 rounded-full bg-[rgba(24,24,27,0.9)] text-gray-400 flex items-center justify-center text-xs border-2 border-[#0B0C0E]">
+									+2</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</main>
+	</div>
+
+	{% include '/projects/modals/_create.html.twig' %}
 
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('dashboard.js') }}"></script>
+	{{ parent() }}
+	<script src="{{ asset('dashboard.js') }}"></script>
 
 {% endblock %}
-
