@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class EvenementRepository extends ServiceEntityRepository
 {
     private EntityManagerInterface $em;
-    
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Evenement::class);
@@ -48,7 +48,7 @@ class EvenementRepository extends ServiceEntityRepository
         $forum_evenement->setId($result['fe_id']);
         $forum_evenement->setTitre($result['fe_titre']);
         $evenement->setForumEvenement($forum_evenement);
-        
+
         return $evenement;
     }
 
@@ -79,12 +79,12 @@ class EvenementRepository extends ServiceEntityRepository
             $evenement->setDescription($row['e_desc']);
             $evenement->setDateEvent($row['e_date']);
             $forum_evenement = new ForumEvenement();
-            $forum_evenement->setId($result['fe_id']);
-            $forum_evenement->setTitre($result['fe_titre']);
+            $forum_evenement->setId($row['fe_id']);
+            $forum_evenement->setTitre($row['fe_titre']);
             $evenement->setForumEvenement($forum_evenement);
             $evenements[] = $evenement;
         }
-        
+
         return $evenements;
     }
 
@@ -99,7 +99,7 @@ class EvenementRepository extends ServiceEntityRepository
 
         $stmt = $conn->prepare($sql);
         $stmt->executeStatement([
-            'nom' => $name,
+            'nom' => $nom,
             'description' => $description,
             'date_event' => $date_event
         ]);
@@ -119,7 +119,7 @@ class EvenementRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement([
             'id' => $id,
-            'nom' => $name,
+            'nom' => $nom,
             'description' => $description,
             'date_event' => $date_event
         ]);
