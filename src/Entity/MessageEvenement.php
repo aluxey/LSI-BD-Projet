@@ -73,4 +73,19 @@ class MessageEvenement
 
         return $this;
     }
+
+    #[ORM\ManyToOne(inversedBy: 'messagesEvenement')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ForumEvenement $forumEvenement = null;
+
+    public function getForumEvenement(): ?ForumEvenement
+    {
+        return $this->forumEvenement;
+    }
+
+    public function setForumEvenement(?ForumEvenement $forumEvenement): static
+    {
+        $this->forumEvenement = $forumEvenement;
+        return $this;
+    }
 }
