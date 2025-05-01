@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ is_register ? 'Sign Up' : 'Login' }} | Assosquare{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-[#0B0C0E] text-white flex flex-col">
+
+    {% include 'components/home_header.html.twig' %}
+
+    {# Auth Forms Section #}
+    <section class="flex-1 flex items-center justify-center pt-16 px-4 md:px-0">
+        <div class="container max-w-md mx-auto py-8">
+            <div class="bg-zinc-900/50 backdrop-blur-md rounded-xl border border-white/5 shadow-2xl overflow-hidden">
+                {# Form Header with Tabs #}
+                <div class="flex border-b border-white/5">
+                    <button
+                        class="flex-1 py-4 text-center font-medium transition-colors auth-tab {% if not is_register %}active{% endif %}"
+                        data-target="login-form">
+                        Login
+                    </button>
+                    <button
+                        class="flex-1 py-4 text-center font-medium transition-colors auth-tab {% if is_register %}active{% endif %}"
+                        data-target="register-form">
+                        Sign Up
+                    </button>
+                </div>
+
+                {# Login Form #}
+                <div id="login-form" class="auth-form p-6 {% if is_register %}hidden{% endif %}">
+                    <h2 class="text-2xl font-medium mb-6 text-center">Welcome Back</h2>
+
+                    {% if login_error is defined %}
+                    <div class="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-md mb-4">
+                        {{ login_error }}
+                    </div>
+                    {% endif %}
+
+                    <form action="" method="post" class="space-y-4">
+                        <div class="space-y-2">
+                            <label for="login-email" class="block text-sm text-zinc-400">Email</label>
+                            <input type="email" id="login-email" name="_username" required
+                                class="w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
+                                placeholder="your@email.com">
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label for="login-password" class="block text-sm text-zinc-400">Password</label>
+                                <a href="" class="text-xs text-[#8564FA] hover:text-[#8564FA]/80 transition-colors">
+                                    Forgot password?
+                                </a>
+                            </div>
+                            <input type="password" id="login-password" name="_password" required
+                                class="w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
+                                placeholder="••••••••">
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-[#8564FA] hover:bg-[#8564FA]/90 text-white rounded-md px-4 py-3 font-medium transition-colors">
+                            Login
+                        </button>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-zinc-400">
+                            Don't have an account?
+                            <button class="text-[#8564FA] hover:text-[#8564FA]/80 transition-colors auth-toggle"
+                                data-show="register-form">
+                                Sign up
+                            </button>
+                        </p>
+                    </div>
+                </div>
+
+                {# Register Form #}
+                <div id="register-form" class="auth-form p-6 {% if not is_register %}hidden{% endif %}">
+                    <h2 class="text-2xl font-medium mb-6 text-center">Create Your Account</h2>
+
+                    {% if register_error is defined %}
+                    <div class="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-md mb-4">
+                        {{ register_error }}
+                    </div>
+                    {% endif %}
+
+                    {{ form_start(register_form, {'attr': {'class': 'space-y-4'}}) }}
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                {{ form_label(register_form.prenom, 'First Name', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                                {{ form_widget(register_form.prenom, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                                {{ form_errors(register_form.prenom) }}
+                            </div>
+
+                            <div class="space-y-2">
+                                {{ form_label(register_form.nom, 'Last Name', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                                {{ form_widget(register_form.nom, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                                {{ form_errors(register_form.nom) }}
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            {{ form_label(register_form.email, 'Email', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                            {{ form_widget(register_form.email, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                            {{ form_errors(register_form.email) }}
+                        </div>
+
+                        <div class="space-y-2">
+                            {{ form_label(register_form.plainPassword, 'Password', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                            {{ form_widget(register_form.plainPassword, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                            {{ form_errors(register_form.plainPassword) }}
+                        </div>
+
+                        <div class="flex items-start">
+                            {{ form_widget(register_form.agreeTerms, {'attr': {'class': 'h-4 w-4 mt-1 rounded border-zinc-800 bg-black/40 text-[#8564FA] focus:ring-[#8564FA]/50'}}) }}
+                            <label for="terms" class="ml-2 block text-sm text-zinc-400">
+                                I agree to the
+                                <a href="#" class="text-[#8564FA] hover:text-[#8564FA]/80 transition-colors">Terms of Service</a> and
+                                <a href="#" class="text-[#8564FA] hover:text-[#8564FA]/80 transition-colors">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-[#8564FA] hover:bg-[#8564FA]/90 text-white rounded-md px-4 py-3 font-medium transition-colors">
+                            Create Account
+                        </button>
+
+                    {{ form_end(register_form) }}
+
+
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-zinc-400">
+                            Already have an account?
+                            <button class="text-[#8564FA] hover:text-[#8564FA]/80 transition-colors auth-toggle"
+                                data-show="login-form">
+                                Login
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    const toggles = document.querySelectorAll('.auth-toggle');
+    const tabs = document.querySelectorAll('.auth-tab');
+    const forms = document.querySelectorAll('.auth-form');
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const target = toggle.getAttribute('data-show');
+
+            // Active le bon onglet
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-target="${target}"]`)?.classList.add('active');
+
+            // Affiche le bon formulaire
+            forms.forEach(f => f.classList.add('hidden'));
+            document.getElementById(target)?.classList.remove('hidden');
+        });
+    });
+</script>
+
+{% endblock %}
