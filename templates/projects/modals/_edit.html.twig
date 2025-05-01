@@ -1,4 +1,4 @@
-<div id="createProjectModal" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div id="editProjectModal" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="fixed inset-0 bg-gray-500/40 transition-opacity" aria-hidden="true"></div>
 
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -8,7 +8,7 @@
                 <div class="px-4 pt-5 pb-4 card sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                            <h2 class="font-semibold text-xl mb-5" id="modal-title">Créer un nouveau projet</h2>
+                            <h2 class="font-semibold text-xl mb-5" id="modal-title">Modifier le projet</h2>
                             <form action="" method="post" class="space-y-4 text-white">
                                 <!-- Nom du projet -->
                                 <div class="space-y-2">
@@ -37,7 +37,7 @@
 
                                 <!-- Ajout d'utilisateurs -->
                                 <div class="space-y-2">
-                                    <label for="user-search" class="block text-sm text-zinc-400">Ajouter des
+                                    <label for="user-search" class="block text-sm text-zinc-400">Gérer les
                                         membres</label>
                                     <div class="relative">
                                         <input type="text" id="user-search" name="user_search"
@@ -73,8 +73,8 @@
                     </div>
                 </div>
                 <div class="px-4 py-3 sm:flex space-x-2 justify-end bg-[rgba(24,24,27,0.7)]">
-                    <button type="button" class="btn btn-secondary px-4 py-2" onclick="toggleModal()">Annuler</button>
-                    <button type="button" class="btn btn-primary px-4 py-2">Créer</button>
+                    <button type="button" class="btn btn-secondary px-4 py-2" onclick="toggleModal('editProjectModal')">Annuler</button>
+                    <button type="button" class="btn btn-primary px-4 py-2">Modifier</button>
                 </div>
             </div>
         </div>

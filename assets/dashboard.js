@@ -170,3 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 })
+
+
+function toggleModal(modalName) {
+    const modal = document.getElementById(modalName);
+    modal.classList.toggle('hidden');
+    modal.classList.toggle('flex');
+}
