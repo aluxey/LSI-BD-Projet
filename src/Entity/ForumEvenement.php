@@ -22,8 +22,9 @@ class ForumEvenement
     #[ORM\JoinColumn(nullable: false)]
     private ?Evenement $evenement = null;
 
-    #[ORM\ManyToMany(targetEntity: MessageEvenement::class, mappedBy: 'forumEvenement')]
+    #[ORM\OneToMany(mappedBy: 'forumEvenement', targetEntity: MessageEvenement::class, cascade: ['persist', 'remove'])]
     private Collection $messagesEvenement;
+
 
     public function __construct()
     {
@@ -69,5 +70,26 @@ class ForumEvenement
     public function getMessagesEvenement(): Collection
     {
         return $this->messagesEvenement;
+    }
+
+    public function addMessagesEvenement(MessageEvenement $message): self
+    {
+        if (!$this->messagesEvenement->contains($message)) {
+            $this->messagesEvenement[] = $message;
+            $message->setForumEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesEvenement(MessageEvenement $message): self
+    {
+        if ($this->messagesEvenement->removeElement($message)) {
+            if ($message->getForumEvenement() === $this) {
+                $message->setForumEvenement(null);
+            }
+        }
+
+        return $this;
     }
 }
