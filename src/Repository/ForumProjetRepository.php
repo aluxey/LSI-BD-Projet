@@ -27,7 +27,7 @@ class ForumProjetRepository extends ServiceEntityRepository
         $sql = "SELECT fp.id as fp_id, fp.titre as fp_titre, p.id as p_id
                 FROM forum_projet as fp
                 JOIN projet as p ON forum_projet.projet_id = projet.id
-                WHERE p.projet_id = :id";
+                WHERE p.id = :id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
@@ -55,17 +55,17 @@ class ForumProjetRepository extends ServiceEntityRepository
     /**
      * @return ForumProjet[] Returns an array of Projet objects
      */
-    public function findByProjetNameField($id): array
+    public function findByProjetNameField($name): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "SELECT fp.id as fp_id, fp.titre as fp_titre, p.id as p_id
                 FROM forum_projet as fp
                 JOIN projet as p ON forum_projet.projet_id = projet.id
-                WHERE p.projet_id = :id";
+                WHERE p.name = :name";
 
         $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['id' => $id]);
+        $resultSet = $stmt->executeQuery(['name' => $name]);
 
         $results = $resultSet->fetchAllAssociative();
         // $result = $resultSet->fetchAssociative();

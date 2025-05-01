@@ -21,12 +21,11 @@ security:
                 login_path: app_login  # Nom de la route pour la page de login (voir ci-dessous)
                 check_path: app_login  # La route utilisée pour vérifier le formulaire
                 # enable_csrf: true  # Protection contre les attaques CSRF
+            access_denied_handler: App\Security\AccessDeniedHandler
             logout:
                 path: app_logout  # Nom de la route pour la déconnexion
                 target: /  # Redirection après déconnexion
 
-            # Optional: Si tu as besoin d'une protection pour certaines pages
-            # access_control:
-            #    - { path: ^/admin, roles: ROLE_ADMIN }
-            #    - { path: ^/profile, roles: ROLE_USER }
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
  

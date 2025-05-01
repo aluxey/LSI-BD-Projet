@@ -1,45 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Forums - Assosquare{% endblock %}
+{% block title %}Forums - Assosquare
+{% endblock %}
 
 {% block body %}
-<div class="min-h-screen bg-[#0B0C0E] text-white">
-    {% include 'components/header.html.twig' %}
+	<div class="min-h-screen bg-[#0B0C0E] text-white">
+		{% include 'components/header.html.twig' %}
 
-    <main class="container mx-auto px-4 py-8">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold gradient-text">Forums</h1>
-            <div class="flex space-x-4 mt-4 md:mt-0">
-                {% if is_granted('ROLE_ADMIN') %}
-                <button class="btn btn-secondary px-4 py-2">
-                    <i class="fas fa-users mr-2"></i> Gérer les membres
-                </button>
-                {% endif %}
-                <button class="btn btn-primary px-4 py-2" onclick="toggleModal()">
-                    <i class="fas fa-plus mr-2"></i> Nouveau forum
-                </button>
-            </div>
-        </div>
+		<main class="container mx-auto px-4 py-8">
+			<div class="flex flex-col md:flex-row justify-between items-center mb-8">
+				<h1 class="text-3xl font-bold gradient-text">Forums</h1>
+				<div class="flex space-x-4 mt-4 md:mt-0">
+					{% if is_granted('ROLE_ADMIN') %}
+						<button class="btn btn-secondary px-4 py-2">
+							<i class="fas fa-users mr-2"></i>
+							Gérer les membres
+						</button>
+					{% endif %}
+					<button class="btn btn-primary px-4 py-2" onclick="toggleModal()">
+						<i class="fas fa-plus mr-2"></i>
+						Nouveau forum
+					</button>
+				</div>
+			</div>
 
-        <!-- Barre de recherche et filtres -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
-            <input type="text" placeholder="Rechercher un sujet..."
-                class="w-full md:w-1/3 bg-zinc-800 text-white placeholder-zinc-400 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+			<!-- Barre de recherche et filtres -->
+			<div class="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
+				<input type="text" placeholder="Rechercher un sujet..." class="w-full md:w-1/3 bg-zinc-800 text-white placeholder-zinc-400 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-            <div class="flex space-x-2">
-                <select
-                    class="bg-zinc-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option>Trier par</option>
-                    <option>Projet</option>
-                    <option>Date</option>
-                    <option>Popularité</option>
-                </select>
-            </div>
-        </div>
+				<div class="flex space-x-2">
+					<select class="bg-zinc-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+						<option>Trier par</option>
+						<option>Projet</option>
+						<option>Date</option>
+						<option>Popularité</option>
+					</select>
+				</div>
+			</div>
 
-        <div class="space-y-4">
-            <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {% set topics = [
+			<div class="space-y-4">
+				<div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+					{% set topics = [
                 {
                 user: 'JD',
                 color: 'bg-blue-500',
@@ -114,52 +115,54 @@
                 }
                 ] %}
 
-                {% for topic in topics %}
-                <div
-                    class="bg-[rgba(24,24,27,0.6)] border border-zinc-700 rounded-lg p-4 hover:bg-[rgba(24,24,27,0.85)] transition cursor-pointer">
-                    <div class="flex items-start">
-                        <div
-                            class="w-10 h-10 rounded-full {{ topic.color }} flex items-center justify-center mr-3 text-white">
-                            {{ topic.user }}
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex justify-between items-start">
-                                <a class="h3 font-medium text-white hover:underline">{{ topic.title }}</a>
-                                <span class="text-xs text-zinc-400">{{ topic.time }}</span>
-                            </div>
-                            <p class="text-sm text-zinc-400 mt-1 line-clamp-2">{{ topic.description }}</p>
-                            <div class="flex items-center mt-2 text-xs text-zinc-400">
-                                <span class="flex items-center mr-4">
-                                    <i class="fas fa-comment mr-1"></i> {{ topic.comments }} réponses
-                                </span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-eye mr-1"></i> {{ topic.views }} vues
-                                </span>
-                                <span class="ml-auto px-2 py-0.5 rounded-full {{ topic.tagColor }}">{{ topic.tag
+					{% for topic in topics %}
+						<div class="bg-[rgba(24,24,27,0.6)] border border-zinc-700 rounded-lg p-4 hover:bg-[rgba(24,24,27,0.85)] transition cursor-pointer">
+							<div class="flex items-start">
+								<div class="w-10 h-10 rounded-full {{ topic.color }} flex items-center justify-center mr-3 text-white">
+									{{ topic.user }}
+								</div>
+								<div class="flex-1">
+									<div class="flex justify-between items-start">
+										<a href="/forum/1" class="h3 font-medium text-white hover:underline">{{ topic.title }}</a>
+										<span class="text-xs text-zinc-400">{{ topic.time }}</span>
+									</div>
+									<p class="text-sm text-zinc-400 mt-1 line-clamp-2">{{ topic.description }}</p>
+									<div class="flex items-center mt-2 text-xs text-zinc-400">
+										<span class="flex items-center mr-4">
+											<i class="fas fa-comment mr-1"></i>
+											{{ topic.comments }}
+											réponses
+										</span>
+										<span class="flex items-center">
+											<i class="fas fa-eye mr-1"></i>
+											{{ topic.views }}
+											vues
+										</span>
+										<span class="ml-auto px-2 py-0.5 rounded-full {{ topic.tagColor }}">{{ topic.tag
                                     }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </main>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</main>
 
-    {% include '/forums/forum-modal.html.twig' %}
+		{% include '/forums/forum-modal.html.twig' %}
 
-</div>
+	</div>
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('dashboard.js') }}"></script>
+	{{ parent() }}
+	<script src="{{ asset('dashboard.js') }}"></script>
 
-<script>
-    function toggleModal() {
-        const modal = document.getElementById('createForumModal');
-        modal.classList.toggle('hidden');
-        modal.classList.toggle('flex');
-    }
-</script>
+	<script>
+		function toggleModal() {
+const modal = document.getElementById('createForumModal');
+modal.classList.toggle('hidden');
+modal.classList.toggle('flex');
+}
+	</script>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Assosquare{% endblock %}
+
+{% block body %}
+    <h1>{{ controller_name }}</h1>
+    <p>index2.html.twig</p>
+
+    <h2>Liste des Membres :</h2>
+    <ul>
+        {% for membre in membres %}
+            <li>{{ membre.nom }} - {{ membre.prenom }}</li>
+        {% else %}
+            <li>Aucun membre trouvé.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

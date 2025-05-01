@@ -1,65 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Événements - Assosquare{% endblock %}
+{% block title %}Événements - Assosquare
+{% endblock %}
 
 {% block body %}
-<div class="min-h-screen bg-[#0B0C0E] text-white">
-    {% include 'components/header.html.twig' %}
-    <main class="container mx-auto px-4 py-8">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-3">
-            <h1 class="text-3xl font-bold gradient-text">Événements</h1>
-            <div class="flex space-x-4 mt-4 md:mt-0">
-                <button class="btn btn-primary px-4 py-2" onclick="toggleModal()">
-                    <i class="fas fa-users mr-2"></i> Nouvel événement
-                </button>
-            </div>
-        </div>
+	<div class="min-h-screen bg-[#0B0C0E] text-white">
+		{% include 'components/header.html.twig' %}
+		<main class="container mx-auto px-24 py-8">
+			<div class="flex flex-col md:flex-row justify-between items-center mb-3">
+				<h1 class="text-3xl font-bold gradient-text">Événements</h1>
+				<div class="flex space-x-4 mt-4 md:mt-0">
+					<button class="btn btn-primary px-4 py-2" onclick="toggleModal('createEventModal')">
+						<i class="fas fa-users mr-2"></i>
+						Nouvel événement
+					</button>
+				</div>
+			</div>
 
 
-        <div class="card p-6 fade-in" style="animation-delay: 0.1s">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">La liste de vos événements</h2>
-                <div class="flex items-center gap-2 flex-wrap">
-                    <button class="btn btn-primary px-3 py-1 text-sm">
-                        <i class="fas fa-plus mr-1"></i> Tous
-                    </button>
-                    <button class="btn btn-secondary px-3 py-1 text-sm">
-                        <i class="fas fa-plus mr-1"></i> Récents
-                    </button>
-                    <button class="btn btn-secondary px-3 py-1 text-sm">
-                        <i class="fas fa-plus mr-1"></i> Passés
-                    </button>
+			<div class="card p-6 fade-in" style="animation-delay: 0.1s">
+				<div class="flex justify-between items-center mb-4">
+					<h2 class="text-xl font-semibold">La liste de vos événements</h2>
+				</div>
 
-                    <!-- Select projet -->
-                    <select
-                        class="px-3 py-1 text-sm bg-black/40 border border-zinc-800 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all">
-                        <option value="">Tous les projets</option>
-                        <option value="1">Projet Alpha</option>
-                        <option value="2">Projet Beta</option>
-                        <option value="3">Projet Gamma</option>
-                    </select>
-                </div>
+				<div class="mt-6">
+					<h3 class="text-sm font-medium text-gray-300 mb-3">Événements à venir</h3>
 
+					<div class="space-y-3">
+						<div class="flex items-center p-3 rounded-md bg-[rgba(24,24,27,0.7)] hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
+							<div class="w-2 h-full min-h-[40px] bg-[var(--primary)] rounded-full mr-3"></div>
+							<div class="flex-1">
+								<a href="/event/1">
+									<p class="font-medium hover:underline">Réunion d'équipe</p>
+								</a>
+								<p class="text-xs text-gray-400">Aujourd'hui, 14:00 - 15:30</p>
+							</div>
+							<button class="text-gray-400 hover:text-white p-1">
+								<i class="fas fa-ellipsis-v"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
 
-            </div>
-            {% include 'dashboard/widgets/calendar.html.twig' %}
-        </div>
-    </main>
-
-    {% include '/events/event-modal.html.twig' %}
-</div>
+		{% include '/events/modals/_create.html.twig' %}
+	</div>
 {% endblock %}
 
 
 {% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('dashboard.js') }}"></script>
-
-<script>
-    function toggleModal() {
-        const modal = document.getElementById('createEventModal');
-        modal.classList.toggle('hidden');
-        modal.classList.toggle('flex');
-    }
-</script>
+	{{ parent() }}
+	<script src="{{ asset('dashboard.js') }}"></script>
 {% endblock %}

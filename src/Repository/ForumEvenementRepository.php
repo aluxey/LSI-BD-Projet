@@ -27,7 +27,7 @@ class ForumEvenementRepository extends ServiceEntityRepository
         $sql = "SELECT fe.id as fe_id, e.titre as fe_titre
                 FROM forum_evenement as fe
                 JOIN evenement as e ON forum_evenement.evenement_id = evenement.id
-                WHERE e.evenement_id = :id";
+                WHERE e.id = :id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
@@ -53,7 +53,7 @@ class ForumEvenementRepository extends ServiceEntityRepository
         $sql = "SELECT fe.id as fe_id, e.titre as fe_titre, e.id as e_id
                 FROM forum_evenement as fe
                 JOIN evenement as e ON forum_evenement.evenement_id = evenement.id
-                WHERE e.evenement_id = :id";
+                WHERE e.id = :id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
