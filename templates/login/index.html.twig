@@ -92,57 +92,40 @@
                     </div>
                     {% endif %}
 
-                    <form action="" method="post" class="space-y-4">
+                    {{ form_start(register_form, {'attr': {'class': 'space-y-4'}}) }}
+
                         <div class="grid grid-cols-2 gap-4">
                             <div class="space-y-2">
-                                <label for="first-name" class="block text-sm text-zinc-400">First Name</label>
-                                <input type="text" id="first-name" name="first_name" required
-                                    class="w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
-                                    placeholder="John">
+                                {{ form_label(register_form.prenom, 'First Name', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                                {{ form_widget(register_form.prenom, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                                {{ form_errors(register_form.prenom) }}
                             </div>
 
                             <div class="space-y-2">
-                                <label for="last-name" class="block text-sm text-zinc-400">Last Name</label>
-                                <input type="text" id="last-name" name="last_name" required
-                                    class="w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
-                                    placeholder="Doe">
+                                {{ form_label(register_form.nom, 'Last Name', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                                {{ form_widget(register_form.nom, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                                {{ form_errors(register_form.nom) }}
                             </div>
                         </div>
 
                         <div class="space-y-2">
-                            <label for="register-email" class="block text-sm text-zinc-400">Email</label>
-                            <input type="email" id="register-email" name="email" required
-                                class="w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
-                                placeholder="your@email.com">
+                            {{ form_label(register_form.email, 'Email', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                            {{ form_widget(register_form.email, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                            {{ form_errors(register_form.email) }}
                         </div>
 
                         <div class="space-y-2">
-                            <label for="register-password" class="block text-sm text-zinc-400">Password</label>
-                            <input type="password" id="register-password" name="password" required
-                                class="w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
-                                placeholder="••••••••">
-                            <p class="text-xs text-zinc-500 mt-1">Password must be at least 8 characters long</p>
-                        </div>
-
-                        <div class="space-y-2">
-                            <label for="confirm-password" class="block text-sm text-zinc-400">Confirm Password</label>
-                            <input type="password" id="confirm-password" name="confirm_password" required
-                                class="w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8564FA]/50 transition-all"
-                                placeholder="••••••••">
+                            {{ form_label(register_form.plainPassword, 'Password', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                            {{ form_widget(register_form.plainPassword, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                            {{ form_errors(register_form.plainPassword) }}
                         </div>
 
                         <div class="flex items-start">
-                            <input type="checkbox" id="terms" name="terms" required
-                                class="h-4 w-4 mt-1 rounded border-zinc-800 bg-black/40 text-[#8564FA] focus:ring-[#8564FA]/50">
+                            {{ form_widget(register_form.agreeTerms, {'attr': {'class': 'h-4 w-4 mt-1 rounded border-zinc-800 bg-black/40 text-[#8564FA] focus:ring-[#8564FA]/50'}}) }}
                             <label for="terms" class="ml-2 block text-sm text-zinc-400">
                                 I agree to the
-                                <a href="" class="text-[#8564FA] hover:text-[#8564FA]/80 transition-colors">
-                                    Terms of Service
-                                </a>
-                                and
-                                <a href="" class="text-[#8564FA] hover:text-[#8564FA]/80 transition-colors">
-                                    Privacy Policy
-                                </a>
+                                <a href="#" class="text-[#8564FA] hover:text-[#8564FA]/80 transition-colors">Terms of Service</a> and
+                                <a href="#" class="text-[#8564FA] hover:text-[#8564FA]/80 transition-colors">Privacy Policy</a>
                             </label>
                         </div>
 
@@ -151,8 +134,8 @@
                             Create Account
                         </button>
 
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
-                    </form>
+                    {{ form_end(register_form) }}
+
 
                     <div class="mt-6 text-center">
                         <p class="text-sm text-zinc-400">
