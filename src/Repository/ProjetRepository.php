@@ -82,12 +82,12 @@ class ProjetRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT m.id as m_id, m.nom as m_nom, m.prenom as m_prenom, m.mail as m_mail, m.mdp as m_mdp, m.role as m_role,
+        $sql = "SELECT m.id as m_id, m.nom as m_nom, m.prenom as m_prenom, m.email as m_mail, m.password as m_mdp, m.role as m_role,
                         p.id as p_id, p.nom as p_nom
                 FROM membre_projet as mp
                 JOIN membre as m ON mp.membre_id = m.id
                 JOIN projet as p ON mp.projet_id = p.id
-                WHERE projet_id = :id";
+                WHERE p_id = :id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);

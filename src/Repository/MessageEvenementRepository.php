@@ -24,7 +24,7 @@ class MessageEvenementRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "SELECT me.message as me_message, me.date_message as me_date_message, m.id as m_id, m.nom as m_nom, m.prenom as m_prenom
-                FROM message_projet as me
+                FROM message_evenement as me
                 JOIN membre as m ON me.membre_id = m.id
                 WHERE me.id = :id";
 

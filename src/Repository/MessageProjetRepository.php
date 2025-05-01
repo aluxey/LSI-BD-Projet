@@ -50,7 +50,7 @@ class MessageProjetRepository extends ServiceEntityRepository
     /**
      * @return MessageProjet[] Returns an array of MessageProjet objects
      */
-    public function findMessagesByForumEvenementIdField($id): array
+    public function findMessagesByForumProjetIdField($id): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
