@@ -18,7 +18,7 @@ class ForumEvenement
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $titre = null;
 
-    #[ORM\OneToOne(inversedBy: 'forum', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'forumEvenement', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Evenement $evenement = null;
 

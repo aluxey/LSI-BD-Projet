@@ -39,4 +39,9 @@ class Promo
 
         return $this;
     }
+    
+    public function __toString(): string
+    {
+        return $this->nom ?? 'Promo sans nom';
+    }
 }

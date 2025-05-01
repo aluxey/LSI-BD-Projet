@@ -236,4 +236,9 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
         // Si des données temporaires liées à l'utilisateur sont stockées, les effacer ici
     }
 
+    public function __toString(): string
+    {
+        return $this->prenom . ' ' . $this->nom; // Par exemple, afficher le prénom et le nom
+    }
+
 }

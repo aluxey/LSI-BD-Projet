@@ -96,4 +96,9 @@ class ForumProjet
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->titre ?? 'Forum sans titre'; // Retourne le titre du forum ou une valeur par défaut
+    }
+
 }
