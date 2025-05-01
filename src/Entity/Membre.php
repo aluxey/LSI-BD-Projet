@@ -90,9 +90,13 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRole(): array
     {
-        return $this->role;
+        if ($this->role) {
+            return [$this->role];
+        }
+    
+        return ['ROLE_USER'];
     }
 
     public function setRole(?string $role): static
