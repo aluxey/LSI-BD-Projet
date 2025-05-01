@@ -30,12 +30,13 @@ class AppFixtures extends Fixture
         }
 
         // Créer 10 membres liés à des promos
-        $membres = [];
         for ($i = 0; $i < 10; $i++) {
             $membre = new Membre();
             $membre->setNom($faker->lastName());
             $membre->setPrenom($faker->firstName());
             $membre->setRole($faker->randomElement(['Admin', 'Membre']));
+            $membre->setEmail($faker->unique()->safeEmail());
+            $membre->setPassword(password_hash('password', PASSWORD_BCRYPT));
             $membre->setPromo($faker->randomElement($promos));
             $manager->persist($membre);
             $membres[] = $membre;
