@@ -26,6 +26,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
@@ -33,6 +34,11 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin_dashboard')]
     public function index(): Response
     {
+        // Vérification du rôle 'ROLE_ADMIN' avant d'afficher le dashboard
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->render('admin/access_denied.html.twig');
+        }
+
         // Si l'utilisateur a le rôle 'ROLE_ADMIN', on affiche le dashboard
         return $this->render('admin/dashboard.html.twig');
     }

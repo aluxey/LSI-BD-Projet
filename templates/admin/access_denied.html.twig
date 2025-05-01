@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès Interdit{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Accès Refusé</h4>
+            <p>Vous n'avez pas les autorisations nécessaires pour accéder à cette page. Cette page est réservée aux administrateurs.</p>
+            <hr>
+            <p class="mb-0">Si vous pensez que c'est une erreur, veuillez contacter un administrateur.</p>
+        </div>
+    </div>
+{% endblock %}
