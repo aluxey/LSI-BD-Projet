@@ -40,7 +40,7 @@ class PromoRepository extends ServiceEntityRepository
             $promos[] = $promo;
         }
         
-        return $promo;
+        return $promos;
     }
 
     /**
