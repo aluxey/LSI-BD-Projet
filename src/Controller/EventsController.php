@@ -38,7 +38,7 @@ final class EventsController extends AbstractController
     #[Route('/event/{id}/delete', name: 'app_event_delete', methods: ['POST'])]
     public function delete(int $id, EvenementRepository $evenementRepository): Response
     {
-        $rowsAffected = $evenementRepository->deleteEvenement($id);
+        $evenementRepository->deleteEvenement($id);
         return $this->redirectToRoute('app_events');
     }
 
@@ -48,7 +48,7 @@ final class EventsController extends AbstractController
         $name = $request->request->get('event_name');
         $description = $request->request->get('event_description');
         $date = $request->request->get('event_date');
-        $rowsAffected = $evenementRepository->createEvenement($name, $description, $date);
+        $evenementRepository->createEvenement($name, $description, $date);
 
         return $this->redirectToRoute('app_events');
     }

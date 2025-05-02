@@ -1,36 +1,24 @@
 <header class="navbar py-4 px-6 sticky top-0 z-10">
-    <div class="container mx-auto flex justify-between items-center">
-        <div class="flex items-center space-x-6">
-            <a class="relative w-8 h-8 overflow-hidden" href="{{ path('app_home') }}">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" class="h-8 w-8"
-                    viewBox="0 0 191.000000 191.000000" preserveAspectRatio="xMidYMid meet">
+	<div class="container mx-auto flex justify-between items-center">
+		<div class="flex items-center space-x-6">
+			<a class="relative w-8 h-8 overflow-hidden" href="{{ path('app_home') }}">
+				<svg xmlns="http://www.w3.org/2000/svg" version="1.0" class="h-8 w-8" viewbox="0 0 191.000000 191.000000" preserveaspectratio="xMidYMid meet">
 
-                    <g transform="translate(0.000000,191.000000) scale(0.100000,-0.100000)" fill="#ffffff"
-                        stroke="none">
-                        <path
-                            d="M5 1898 c-3 -7 -4 -146 -3 -308 l3 -295 125 -1 c402 -2 440 -4 440 -17 0 -9 -31 -22 -82 -36 -122 -33 -200 -75 -284 -154 -164 -153 -231 -354 -191 -575 54 -293 316 -512 613 -512 113 0 173 14 279 65 189 91 292 228 355 473 12 45 30 57 30 20 1 -13 1 -143 0 -290 l-1 -268 311 0 311 0 -3 698 -4 697 -23 69 c-35 106 -77 173 -160 257 -60 60 -94 85 -161 117 -47 22 -107 46 -135 53 -76 19 -1413 25 -1420 7z m1285 -618 c6 -8 8 -21 5 -28 -3 -8 -5 -155 -5 -328 l0 -314 -329 0 c-182 0 -332 4 -335 8 -3 5 -6 157 -6 338 -2 309 -1 329 17 336 10 4 159 6 331 5 265 -2 314 -4 322 -17z" />
-                    </g>
-                </svg>
-                <div
-                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 shimmer-effect">
-                </div>
-            </a>
-            <nav class="hidden md:flex space-x-6">
-                <a href="{{ path('app_dashboard') }}"
-                    class="{% if app.request.attributes.get('_route') == 'app_dashboard' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Dashboard</a>
+					<g transform="translate(0.000000,191.000000) scale(0.100000,-0.100000)" fill="#ffffff" stroke="none">
+						<path d="M5 1898 c-3 -7 -4 -146 -3 -308 l3 -295 125 -1 c402 -2 440 -4 440 -17 0 -9 -31 -22 -82 -36 -122 -33 -200 -75 -284 -154 -164 -153 -231 -354 -191 -575 54 -293 316 -512 613 -512 113 0 173 14 279 65 189 91 292 228 355 473 12 45 30 57 30 20 1 -13 1 -143 0 -290 l-1 -268 311 0 311 0 -3 698 -4 697 -23 69 c-35 106 -77 173 -160 257 -60 60 -94 85 -161 117 -47 22 -107 46 -135 53 -76 19 -1413 25 -1420 7z m1285 -618 c6 -8 8 -21 5 -28 -3 -8 -5 -155 -5 -328 l0 -314 -329 0 c-182 0 -332 4 -335 8 -3 5 -6 157 -6 338 -2 309 -1 329 17 336 10 4 159 6 331 5 265 -2 314 -4 322 -17z"/>
+					</g>
+				</svg>
+				<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 shimmer-effect"></div>
+			</a>
+			<nav class="hidden md:flex space-x-6">
+				<a href="{{ path('app_dashboard') }}" class="{% if app.request.attributes.get('_route') == 'app_dashboard' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Dashboard</a>
 
-                <a href="{{ path('app_projects') }}"
-                    class="{% if app.request.attributes.get('_route') == 'app_projects' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Projets</a>
-                <a href="{{ path('app_events') }}"
-                    class="{% if app.request.attributes.get('_route') == 'app_events' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Événements</a>
+				<a href="{{ path('app_projects') }}" class="{% if app.request.attributes.get('_route') == 'app_projects' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Projets</a>
+				<a href="{{ path('app_events') }}" class="{% if app.request.attributes.get('_route') == 'app_events' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Événements</a>
 
-                <a href="{{ path('app_forums') }}"
-                    class="{% if app.request.attributes.get('_route') == 'app_forums' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Forum</a>
-                {% if is_granted('ROLE_ADMIN') %}
-                <a href="#" class="text-gray-400 hover:text-white transition">Administration</a>
-                {% endif %}
-            </nav>
-        </div>
+				<a href="{{ path('app_forums') }}" class="{% if app.request.attributes.get('_route') == 'app_forums' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Forum</a>
+			</nav>
+		</div>
 
         <div class="flex items-center space-x-4">
             <div class="relative" x-data="{ open: false }">
@@ -42,23 +30,22 @@
                     <i class="fas fa-chevron-down text-xs text-gray-400"></i>
                 </button>
 
-                <div x-show="open" @click.away="open = false"
-                    class="absolute right-0 mt-2 w-48 bg-[rgba(24,24,27,0.95)] border border-[var(--border)] rounded-md shadow-lg py-1 z-20">
-                    <a href="#"
-                        class="block px-4 py-2 text-sm text-gray-300 hover:bg-[rgba(133,100,250,0.1)] hover:text-white">
-                        <i class="fas fa-user mr-2"></i> Profil
-                    </a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm text-gray-300 hover:bg-[rgba(133,100,250,0.1)] hover:text-white">
-                        <i class="fas fa-cog mr-2"></i> Paramètres
-                    </a>
-                    <div class="border-t border-[var(--border)] my-1"></div>
-                    <a href=""
-                        class="block px-4 py-2 text-sm text-gray-300 hover:bg-[rgba(133,100,250,0.1)] hover:text-white">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-[rgba(24,24,27,0.95)] border border-[var(--border)] rounded-md shadow-lg py-1 z-20">
+					{% if is_granted('ROLE_ADMIN') %}
+
+						<a href="{{ path('admin') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[rgba(133,100,250,0.1)] hover:text-white">
+							<i class="fas fa-cog mr-2"></i>
+							Admin dashboard
+						</a>
+					{% endif %}
+
+					<div class="border-t border-[var(--border)] my-1"></div>
+					<a href="{{ path('app_logout') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[rgba(133,100,250,0.1)] hover:text-white ">
+						<i class="fas fa-sign-out-alt mr-2"></i>
+						Déconnexion
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </header>

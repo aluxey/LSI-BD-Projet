@@ -3,8 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Membre;
-use Doctrine\ORM\EntityManagerInterface;  // Correcte importation
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -23,15 +23,29 @@ class MembreCrudController extends AbstractCrudController
             IdField::new('id')->onlyOnIndex(),
             TextField::new('nom'),
             TextField::new('prenom'),
-            TextField::new('role'),
+            ChoiceField::new('role')
+                ->setLabel('Rôle')
+                ->setChoices([
+                    'Utilisateur' => 'USER',
+                    'Administrateur' => 'ADMIN'
+                ])
+                ->allowMultipleChoices(false)  // Permet uniquement un seul choix
+                ->setFormTypeOption('expanded', false)  // Liste déroulante
+                ->setFormTypeOption('multiple', false),  // Permet un seul choix
             EmailField::new('email'),
             AssociationField::new('promo'),
         ];
 
         if ($pageName !== 'index') {
-            // Ajoute le champ password uniquement si ce n'est pas la vue "index"
             $fields[] = TextField::new('password')
-                ->setFormTypeOption('attr', ['type' => 'password']);  // Masquer les caractères
+                ->setFormTypeOption('attr', [
+                    'type' => 'password',
+                    'autocomplete' => 'new-password'  // Empêche les suggestions du navigateur
+                ])
+                ->setFormTypeOption('empty_data', '')
+                ->setFormTypeOption('data', null)
+                ->setRequired(false)
+                ->onlyOnForms();
         }
 
         return $fields;
