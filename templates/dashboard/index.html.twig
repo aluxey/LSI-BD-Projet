@@ -107,7 +107,7 @@
 											{{ member.prenom[:1]|upper ~ member.nom[:1]|upper }}
 										</div>
 										<div>
-											<p class="font-medium">{{ member.name }}</p>
+											<p class="font-medium">{{ member.nom }}</p>
 										</div>
 										<div class="ml-auto">
 											<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
@@ -129,26 +129,4 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('dashboard.js') }}"></script>
-
-	<!-- Membres actifs -->
-	{% if is_granted('ROLE_ADMIN') %}
-		<div class="card p-6 fade-in" style="animation-delay: 0.4s">
-			<h2 class="text-xl font-semibold mb-4">Membres actifs</h2>
-			<ul class="space-y-3">
-				{% for member in membres %}
-					<li class="flex items-center space-x-3">
-						<div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center">
-							{{ member.prenom[:1]|upper ~ member.nom[:1]|upper }}
-						</div>
-						<div>
-							<p class="font-medium">{{ member.nom }}</p>
-						</div>
-						<div class="ml-auto">
-							<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
-						</div>
-					</li>
-				{% endfor %}
-			</ul>
-		</div>
-	{% endif %}
-</div></div></main></div>{% endblock %}
+{% endblock %}
