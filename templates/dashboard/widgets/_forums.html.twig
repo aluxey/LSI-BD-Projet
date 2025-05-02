@@ -22,7 +22,7 @@
 				<div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-3">FE</div>
 				<div class="flex-1">
 					<div class="flex justify-between">
-						<a href="forum/{{ forum.id }}" class="font-medium  hover:underline">{{ forum.titre }}</a>
+						<a href="{{ path('app_forums_show', {id: forum.id}) }}" class="font-medium  hover:underline">{{ forum.titre }}</a>
 					</div>
 					<div class="flex items-center mt-2 text-xs text-gray-400">
 						<span class="ml-auto px-2 py-0.5 rounded-full bg-[rgba(175,76,165,0.2)] text-green-500">Projet</span>

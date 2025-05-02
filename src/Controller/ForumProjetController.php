@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 use App\Repository\ForumProjetRepository;
-use App\Repository\MessageEvenementRepository;
+use App\Repository\MessageProjetRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,11 +35,11 @@ final class ForumProjetController extends AbstractController
     public function show(
         int $id,
         ForumProjetRepository $forumProjetRepository,
-        MessageEvenementRepository $messageEvenementRepository
+        MessageProjetRepository $messageProjetRepository
     ): Response
     {
         $forum = $forumProjetRepository->findById($id);
-        $messages = $messageEvenementRepository->findMessagesByForumEvenementIdField($id);
+        $messages = $messageProjetRepository->findMessagesByForumProjetIdField($id);
         return $this->render('forums_p/show.html.twig', [
             'forum' => $forum,
             'messages' => $messages

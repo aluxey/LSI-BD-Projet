@@ -45,13 +45,9 @@
 						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg ml-0 md:ml-8">
 							<div class="flex items-start">
 								<div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-4 flex-shrink-0">
-									{{ message.membre.prenom[:1]|upper ~ message.membre.nom[:1]|upper }}
+									{{ message.membre.prenom[:1]|upper ~ ' ' ~ message.membre.nom[:1]|upper }}
 								</div>
 								<div class="flex-1">
-									<div class="flex flex-col sm:flex-row sm:items-center mb-2">
-										<h3 class="font-medium">{{ message.membre.prenom ~ message.membre.nom }}</h3>
-										<span class="text-xs text-gray-400 sm:ml-4">Posté le {{message.dateMessage}}</span>
-									</div>
 									<div class="text-gray-300">
 										<p>{{message.message}}</p>
 									</div>

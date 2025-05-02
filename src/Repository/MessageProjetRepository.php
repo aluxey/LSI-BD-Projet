@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\MessageProjet;
+use App\Entity\Membre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -54,7 +55,7 @@ class MessageProjetRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT mp.message as mp_message, mp.date_message as mp_date_message, m.id as m_id, m.nom as m_nom, m.prenom as m_prenom
+        $sql = "SELECT mp.id as mp_id, mp.message as mp_message, mp.date_message as mp_date_message, m.id as m_id, m.nom as m_nom, m.prenom as m_prenom
                 FROM message_projet as mp
                 JOIN membre as m ON mp.membre_id = m.id
                 WHERE mp.forum_projet_id = :id";
@@ -70,7 +71,8 @@ class MessageProjetRepository extends ServiceEntityRepository
             // Création de l'objet MessageProjet
             $message = new MessageProjet();
             $message->setId($row['mp_id']);
-            $message->setNom($row['mp_date_message']);
+            $message->setMessage($row['mp_message']);
+            // $message->setDateMessage(new \DateTime($row['mp_date_message']));
             $membre = new Membre();
             $membre->setId($row['m_id']);
             $membre->setNom($row['m_nom']);
