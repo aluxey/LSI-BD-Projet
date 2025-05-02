@@ -90,15 +90,6 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): array
-    {
-        if ($this->role) {
-            return [$this->role];
-        }
-    
-        return ['ROLE_USER'];
-    }
-
     public function setRole(?string $role): static
     {
         $this->role = $role;
@@ -219,9 +210,18 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
+        // Si le mot de passe est déjà haché, on n'effectue pas de hachage
+        if (empty($this->password) || !password_verify($password, $this->password)) {
+            // Hacher le mot de passe avant de le stocker
+            $this->password = password_hash($password, PASSWORD_BCRYPT);
+        }
 
         return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
     }
 
     public function getRoles(): array
