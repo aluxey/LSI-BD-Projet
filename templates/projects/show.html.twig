@@ -48,38 +48,51 @@
 							</div>
 						</div>
 					</div>
+					{% for forum in forums %}
+						<div class="lg:col-span-2 space-y-6">
+                <a class="rounded-full border border-zinc-800 bg-black/20 backdrop-blur-sm text-sm px-6 py-2 h-auto hover:bg-zinc-800/50 transition-colors"
+                    href="{{ path('app_forums_show_p', {id: forum.id}) }}">
+							<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
+								<h2 class="text-xl font-semibold mb-4">Forum</h2>
+								<div class="text-gray-300">
+									<p>{{ forum.titre }}</p>
+								</div>
+							</div>
+							</a>
+						</div>
+					{% endfor %}
 				<div class="space-y-6">
-    <div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">Membres</h2>
-        <ul class="space-y-3">
-            {% for membre in membres %}
-                <li class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
-                        {% if membre.prenom is not empty and membre.nom is not empty %}
-                            {{ membre.prenom[:1]|upper ~ membre.nom[:1]|upper }}
-                        {% else %}
-                            ?
-                        {% endif %}
-                    </div>
-                    <div>
-                        <p class="font-medium">
-                            {{ membre.id }} -
-                            {{ membre.prenom ?? 'Inconnu' }} {{ membre.nom ?? 'Membre' }}
-                        </p>
-                        <p class="text-xs text-gray-400">
-                            {{ membre.email ?? 'Email inconnu' }}
-                        </p>
-                    </div>
-                </li>
-            {% else %}
-                <li>Aucun membre trouvé.</li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+					<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
+						<h2 class="text-xl font-semibold mb-4">Membres</h2>
+						<ul class="space-y-3">
+							{% for membre in membres %}
+								<li class="flex items-center space-x-3">
+									<div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
+										{% if membre.prenom is not empty and membre.nom is not empty %}
+											{{ membre.prenom[:1]|upper ~ membre.nom[:1]|upper }}
+										{% else %}
+											?
+										{% endif %}
+									</div>
+									<div>
+										<p class="font-medium">
+											{{ membre.id }} -
+											{{ membre.prenom ?? 'Inconnu' }} {{ membre.nom ?? 'Membre' }}
+										</p>
+										<p class="text-xs text-gray-400">
+											{{ membre.email ?? 'Email inconnu' }}
+										</p>
+									</div>
+								</li>
+							{% else %}
+								<li>Aucun membre trouvé.</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
 
 
-</div>
+			</div>
 
 				</div>
 			</div>

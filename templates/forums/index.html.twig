@@ -22,82 +22,16 @@
 
 			<div class="space-y-4">
 				<div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-					{% set topics = [
-                {
-                user: 'JD',
-                color: 'bg-blue-500',
-                title: 'Mise à jour des serveurs prévue',
-                time: 'Il y a 2h',
-                description: 'Nous prévoyons une mise à jour des serveurs ce weekend. Veuillez prévoir une
-                indisponibilité de 2 heures...',
-                comments: 8,
-                views: 24,
-                tag: 'Annonce',
-                tagColor: 'bg-green-500/10 text-green-400'
-                },
-                {
-                user: 'MK',
-                color: 'bg-purple-500',
-                title: 'Question sur le nouveau design system',
-                time: 'Hier',
-                description: 'J\'ai quelques questions concernant l\'implémentation du nouveau design system dans nos
-                projets actuels...',
-                comments: 12,
-                views: 45,
-                tag: 'Discussion',
-                tagColor: 'bg-[rgba(133,100,250,0.2)] text-[var(--primary)]'
-                },
-                {
-                user: 'AL',
-                color: 'bg-green-500',
-                title: 'Idées pour l\'événement d\'équipe',
-                time: 'Il y a 3j',
-                description: 'J\'aimerais recueillir vos idées pour notre prochain événement d\'équipe qui aura lieu le
-                mois prochain...',
-                comments: 23,
-                views: 67,
-                tag: 'Événement',
-                tagColor: 'bg-[#E953B8]/10 text-[#E953B8]'
-                },
-                {
-                user: 'FR',
-                color: 'bg-red-500',
-                title: 'Problème de build sur la CI',
-                time: 'Il y a 5j',
-                description: 'La pipeline échoue depuis la dernière mise à jour, quelqu’un a-t-il rencontré le même
-                souci ?',
-                comments: 5,
-                views: 19,
-                tag: 'Bug',
-                tagColor: 'bg-red-500/10 text-red-400'
-                },
-                {
-                user: 'LC',
-                color: 'bg-yellow-500',
-                title: 'Retour d’expérience sur React Native',
-                time: 'Il y a 1 semaine',
-                description: 'Je partage ici mon retour d’expérience après 2 mois d’utilisation de React Native pour un
-                projet mobile.',
-                comments: 17,
-                views: 60,
-                tag: 'Feedback',
-                tagColor: 'bg-yellow-500/10 text-yellow-400'
-                },
-                {
-                user: 'NS',
-                color: 'bg-pink-500',
-                title: 'Suggestions pour améliorer la documentation',
-                time: 'Il y a 2 semaines',
-                description: 'La documentation actuelle manque de clarté sur certaines API. Voici quelques pistes
-                d’amélioration.',
-                comments: 9,
-                views: 36,
-                tag: 'Suggestion',
-                tagColor: 'bg-pink-500/10 text-pink-400'
-                }
-                ] %}
-
-					{% for forum in forums %}
+					{% for forum in forums_e %}
+						<div class="bg-[rgba(24,24,27,0.6)] border border-zinc-700 rounded-lg p-4 hover:bg-[rgba(24,24,27,0.85)] transition cursor-pointer">
+							<div class="flex items-start">
+								<div class="w-10 h-10 rounded-full flex items-center justify-center mr-3 text-white">
+									{{ forum.titre }}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					{% for forum in forums_p %}
 						<div class="bg-[rgba(24,24,27,0.6)] border border-zinc-700 rounded-lg p-4 hover:bg-[rgba(24,24,27,0.85)] transition cursor-pointer">
 							<div class="flex items-start">
 								<div class="w-10 h-10 rounded-full flex items-center justify-center mr-3 text-white">

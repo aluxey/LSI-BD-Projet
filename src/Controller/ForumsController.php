@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Repository\ForumEvenementRepository;
+use App\Repository\ForumProjetRepository;
 use App\Repository\MessageEvenementRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,12 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
 final class ForumsController extends AbstractController
 {
     #[Route('/forums', name: 'app_forums')]
-    public function index(ForumEvenementRepository $forumEvenementRepository): Response
+    public function index(ForumEvenementRepository $forumEvenementRepository, ForumProjetRepository $forumProjetRepository): Response
     {
         $forums = $forumEvenementRepository->findAll();
+        $projets = $forumProjetRepository->findAll();
         $is_register = false;
         return $this->render('forums/index.html.twig', [
-            'forums' => $forums
+            'forums_e' => $forums,
+            'forums_p' => $projets
         ]);
     }
 

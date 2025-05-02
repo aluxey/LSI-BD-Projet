@@ -27,7 +27,7 @@ final class ForumProjetController extends AbstractController
         MessageEvenementRepository $messageEvenementRepository
     ): Response
     {
-        $forum = $forumProjetRepository->findByProjetIdField($id);
+        $forum = $forumProjetRepository->findById($id);
         $messages = $messageEvenementRepository->findMessagesByForumEvenementIdField($id);
         return $this->render('forums_p/show.html.twig', [
             'forum' => $forum,

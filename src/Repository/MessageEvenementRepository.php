@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\MessageEvenement;
+use App\Entity\Membre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -71,7 +72,7 @@ class MessageEvenementRepository extends ServiceEntityRepository
             $message = new MessageEvenement();
             $message->setId($row['me_id']);
             $message->setMessage($row['me_message']);
-            $message->setDateMessage($row['me_date_message']);
+            $message->setDateMessage(new \DateTime($row['me_date_message']));
             $membre = new Membre();
             $membre->setId($row['m_id']);
             $membre->setNom($row['m_nom']);
