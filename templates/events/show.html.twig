@@ -16,7 +16,7 @@
 
 			<div class="card p-6 fade-in">
 				<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-[var(--border)] pb-4">
-					<h1 class="text-2xl md:text-3xl font-bold gradient-text mb-4 md:mb-0">Soirée Innovation Tech 2025</h1>
+					<h1 class="text-2xl md:text-3xl font-bold gradient-text mb-4 md:mb-0">{{event.nom}}</h1>
 
 					<div class="flex space-x-3">
 						<a onclick="toggleModal('createForumEventModal')" class="btn btn-primary px-4 py-2">
@@ -32,7 +32,7 @@
 							Supprimer
 						</button>
 
-						<form id="delete-form" action="/project/delete/1" method="post" style="display: none;">
+						<form id="delete-form" action="/project/delete/{{event.id}}" method="post" style="display: none;">
 							<input type="hidden" name="_method" value="DELETE">
 							<input type="hidden" name="_token" value="TOKEN_FICTIF_SUPPRESSION">
 						</form>
@@ -48,42 +48,8 @@
 						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
 							<h2 class="text-xl font-semibold mb-4">Description</h2>
 							<div class="text-gray-300">
-								<p>Rejoignez-nous pour une soirée dédiée à l'innovation technologique avec des présentations, des démonstrations et du networking.</p>
+								<p>{{event.description}}</p>
 							</div>
-						</div>
-					</div>
-
-					<!-- Sidebar -->
-					<div
-						class="space-y-6">
-						<!-- Date and Time -->
-						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
-							<h2 class="text-xl font-semibold mb-4">Détails</h2>
-							<div
-								class="space-y-4">
-								<!-- Date -->
-								<div class="flex items-start">
-									<div class="w-10 h-10 rounded-lg bg-[rgba(133,100,250,0.2)] flex items-center justify-center mr-3 flex-shrink-0">
-										<i class="fas fa-calendar text-[var(--primary)]"></i>
-									</div>
-									<div>
-										<p class="text-sm text-gray-400">Date</p>
-										<p class="font-medium">15/05/2025</p>
-									</div>
-								</div>
-
-								<!-- All-day event -->
-								<div class="flex items-start">
-									<div class="w-10 h-10 rounded-lg bg-[rgba(133,100,250,0.2)] flex items-center justify-center mr-3 flex-shrink-0">
-										<i class="fas fa-clock text-[var(--primary)]"></i>
-									</div>
-									<div>
-										<p class="text-sm text-gray-400">Durée</p>
-										<p class="font-medium">18:00 - 22:00</p>
-									</div>
-								</div>
-							</div>
-
 						</div>
 					</div>
 				</div>

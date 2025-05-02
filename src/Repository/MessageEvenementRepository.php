@@ -54,7 +54,7 @@ class MessageEvenementRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT me.message as me_message, me.date_message as me_date_message, m.id as m_id, m.nom as m_nom, m.prenom as m_prenom
+        $sql = "SELECT me.id as me_id, me.message as me_message, me.date_message as me_date_message, m.id as m_id, m.nom as m_nom, m.prenom as m_prenom
                 FROM message_evenement as me
                 JOIN membre as m ON me.membre_id = m.id
                 WHERE me.forum_evenement_id = :id";
@@ -70,7 +70,8 @@ class MessageEvenementRepository extends ServiceEntityRepository
             // Création de l'objet MessageEvenement
             $message = new MessageEvenement();
             $message->setId($row['me_id']);
-            $message->setNom($row['me_date_message']);
+            $message->setMessage($row['me_message']);
+            $message->setDateMessage($row['me_date_message']);
             $membre = new Membre();
             $membre->setId($row['m_id']);
             $membre->setNom($row['m_nom']);

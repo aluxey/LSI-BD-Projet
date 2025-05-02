@@ -1,82 +1,37 @@
 <div class="space-y-4">
     <!-- Sujet 1 -->
+    
+    {% for forum in forumsEvent %}
     <div class="bg-[rgba(24,24,27,0.7)] p-3 rounded-lg hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
         <div class="flex items-start">
-            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-3">JD</div>
+            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-3">FE</div>
             <div class="flex-1">
                 <div class="flex justify-between">
-                    <h3 class="font-medium">Mise à jour des serveurs prévue</h3>
-                    <span class="text-xs text-gray-400">Il y a 2h</span>
+                    <h3 class="font-medium">{{ forum.titre }}</h3>
                 </div>
-                <p class="text-sm text-gray-400 line-clamp-2 mt-1">
-                    Nous prévoyons une mise à jour des serveurs ce weekend. Veuillez prévoir une indisponibilité de 2
-                    heures...
-                </p>
                 <div class="flex items-center mt-2 text-xs text-gray-400">
-                    <span class="flex items-center mr-4">
-                        <i class="fas fa-comment mr-1"></i> 8 réponses
-                    </span>
-                    <span class="flex items-center">
-                        <i class="fas fa-eye mr-1"></i> 24 vues
-                    </span>
                     <span
-                        class="ml-auto px-2 py-0.5 rounded-full bg-[rgba(76,175,80,0.2)] text-green-500">Annonce</span>
+                        class="ml-auto px-2 py-0.5 rounded-full bg-[rgba(76,175,80,0.2)] text-green-500">Evenement</span>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Sujet 2 -->
+    {% endfor %}
+    
+    {% for forum in forumsProjet %}
     <div class="bg-[rgba(24,24,27,0.7)] p-3 rounded-lg hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
         <div class="flex items-start">
-            <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center mr-3">MK</div>
+            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-3">FP</div>
             <div class="flex-1">
                 <div class="flex justify-between">
-                    <h3 class="font-medium">Question sur le nouveau design system</h3>
-                    <span class="text-xs text-gray-400">Hier</span>
+                    <h3 class="font-medium">{{ forum.titre }}</h3>
                 </div>
-                <p class="text-sm text-gray-400 line-clamp-2 mt-1">
-                    J'ai quelques questions concernant l'implémentation du nouveau design system dans nos projets
-                    actuels...
-                </p>
                 <div class="flex items-center mt-2 text-xs text-gray-400">
-                    <span class="flex items-center mr-4">
-                        <i class="fas fa-comment mr-1"></i> 12 réponses
-                    </span>
-                    <span class="flex items-center">
-                        <i class="fas fa-eye mr-1"></i> 45 vues
-                    </span>
                     <span
-                        class="ml-auto px-2 py-0.5 rounded-full bg-[rgba(133,100,250,0.2)] text-[var(--primary)]">Discussion</span>
+                        class="ml-auto px-2 py-0.5 rounded-full bg-[rgba(76,175,80,0.2)] text-green-500">Projet</span>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Sujet 3 -->
-    <div class="bg-[rgba(24,24,27,0.7)] p-3 rounded-lg hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
-        <div class="flex items-start">
-            <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center mr-3">AL</div>
-            <div class="flex-1">
-                <div class="flex justify-between">
-                    <h3 class="font-medium">Idées pour l'événement d'équipe</h3>
-                    <span class="text-xs text-gray-400">Il y a 3j</span>
-                </div>
-                <p class="text-sm text-gray-400 line-clamp-2 mt-1">
-                    J'aimerais recueillir vos idées pour notre prochain événement d'équipe qui aura lieu le mois
-                    prochain...
-                </p>
-                <div class="flex items-center mt-2 text-xs text-gray-400">
-                    <span class="flex items-center mr-4">
-                        <i class="fas fa-comment mr-1"></i> 23 réponses
-                    </span>
-                    <span class="flex items-center">
-                        <i class="fas fa-eye mr-1"></i> 67 vues
-                    </span>
-                    <span
-                        class="ml-auto px-2 py-0.5 rounded-full bg-[rgba(229,83,184,0.2)] text-[#E953B8]">Événement</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>

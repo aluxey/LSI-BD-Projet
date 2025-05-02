@@ -2,40 +2,17 @@
     <h3 class="text-sm font-medium text-gray-300 mb-3">Événements à venir</h3>
 
     <div class="space-y-3">
+        {% for event in events %}
         <div
             class="flex items-center p-3 rounded-md bg-[rgba(24,24,27,0.7)] hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
             <div class="w-2 h-full min-h-[40px] bg-[var(--primary)] rounded-full mr-3"></div>
             <div class="flex-1">
-                <p class="font-medium">Réunion d'équipe</p>
-                <p class="text-xs text-gray-400">Aujourd'hui, 14:00 - 15:30</p>
+                <p class="font-medium">{{ event.nom }}</p>
             </div>
             <button class="text-gray-400 hover:text-white p-1">
                 <i class="fas fa-ellipsis-v"></i>
             </button>
         </div>
-
-        <div
-            class="flex items-center p-3 rounded-md bg-[rgba(24,24,27,0.7)] hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
-            <div class="w-2 h-full min-h-[40px] bg-[#E953B8] rounded-full mr-3"></div>
-            <div class="flex-1">
-                <p class="font-medium">Deadline projet Nexus</p>
-                <p class="text-xs text-gray-400">22 Juin, Toute la journée</p>
-            </div>
-            <button class="text-gray-400 hover:text-white p-1">
-                <i class="fas fa-ellipsis-v"></i>
-            </button>
-        </div>
-
-        <div
-            class="flex items-center p-3 rounded-md bg-[rgba(24,24,27,0.7)] hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
-            <div class="w-2 h-full min-h-[40px] bg-[#4CAF50] rounded-full mr-3"></div>
-            <div class="flex-1">
-                <p class="font-medium">Formation UX Design</p>
-                <p class="text-xs text-gray-400">27 Juin, 09:00 - 12:00</p>
-            </div>
-            <button class="text-gray-400 hover:text-white p-1">
-                <i class="fas fa-ellipsis-v"></i>
-            </button>
-        </div>
+        {% endfor %}
     </div>
 </div>

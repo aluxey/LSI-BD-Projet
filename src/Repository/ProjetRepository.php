@@ -20,6 +20,36 @@ class ProjetRepository extends ServiceEntityRepository
     /**
      * @return Projet[] Returns an array of Projet objects
      */
+    public function findAll(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT p.id as p_id, p.nom as p_nom, p.description as p_desc, p.type as p_type
+                FROM projet as p";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        $results = $resultSet->fetchAllAssociative();
+
+        $projets = [];
+
+        foreach ($results as $row) {
+            // Création de l'objet Projet
+            $projet = new Projet();
+            $projet->setId($row['p_id']);
+            $projet->setNom($row['p_nom']);
+            $projet->setDescription($row['p_desc']);
+            $projet->setType($row['p_type']);
+            $projets[] = $projet;
+        }
+        
+        return $projets;
+    }
+
+    /**
+     * @return Projet[] Returns an array of Projet objects
+     */
     public function findByNameField($name): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -70,7 +100,7 @@ class ProjetRepository extends ServiceEntityRepository
         $projet->setId($result['p_id']);
         $projet->setNom($result['p_nom']);
         $projet->setDescription($result['p_desc']);
-        $projet->setDateEvent($result['p_date']);
+        $projet->setDateEvent(new \DateTime($result['p_date']));
         
         return $projet;
     }
@@ -87,7 +117,7 @@ class ProjetRepository extends ServiceEntityRepository
                 FROM membre_projet as mp
                 JOIN membre as m ON mp.membre_id = m.id
                 JOIN projet as p ON mp.projet_id = p.id
-                WHERE p_id = :id";
+                WHERE p.id = :id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
@@ -161,10 +191,20 @@ class ProjetRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE projet WHERE id = :id";
-
+        $sql = "DELETE FROM message_projet WHERE forum_projet_id IN (
+            SELECT id FROM forum_projet WHERE projet_id = :id
+        );";
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);
+
+        $sql = "DELETE FROM forum_projet WHERE projet_id = :id";
+        $stmt = $conn->prepare($sql);
+        $rowsAffected = $stmt->executeStatement(['id' => $id]);
+
+        $sql = "DELETE FROM projet WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $rowsAffected = $stmt->executeStatement(['id' => $id]);
+
 
         return $rowsAffected;
     }

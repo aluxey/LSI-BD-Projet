@@ -97,32 +97,11 @@
                 }
                 ] %}
 
-					{% for topic in topics %}
+					{% for forum in forums %}
 						<div class="bg-[rgba(24,24,27,0.6)] border border-zinc-700 rounded-lg p-4 hover:bg-[rgba(24,24,27,0.85)] transition cursor-pointer">
 							<div class="flex items-start">
-								<div class="w-10 h-10 rounded-full {{ topic.color }} flex items-center justify-center mr-3 text-white">
-									{{ topic.user }}
-								</div>
-								<div class="flex-1">
-									<div class="flex justify-between items-start">
-										<a href="/forum/1" class="h3 font-medium text-white hover:underline">{{ topic.title }}</a>
-										<span class="text-xs text-zinc-400">{{ topic.time }}</span>
-									</div>
-									<p class="text-sm text-zinc-400 mt-1 line-clamp-2">{{ topic.description }}</p>
-									<div class="flex items-center mt-2 text-xs text-zinc-400">
-										<span class="flex items-center mr-4">
-											<i class="fas fa-comment mr-1"></i>
-											{{ topic.comments }}
-											réponses
-										</span>
-										<span class="flex items-center">
-											<i class="fas fa-eye mr-1"></i>
-											{{ topic.views }}
-											vues
-										</span>
-										<span class="ml-auto px-2 py-0.5 rounded-full {{ topic.tagColor }}">{{ topic.tag
-                                    }}</span>
-									</div>
+								<div class="w-10 h-10 rounded-full flex items-center justify-center mr-3 text-white">
+									{{ forum.titre }}
 								</div>
 							</div>
 						</div>
@@ -131,7 +110,7 @@
 			</div>
 		</main>
 
-		{% include '/forums/modals/_create.html.twig' %}
+		{# {% include '/forums/modals/_create.html.twig' %} #}
 
 	</div>
 {% endblock %}

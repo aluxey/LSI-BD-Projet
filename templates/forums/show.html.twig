@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Question sur le nouveau design system - Forum Graphyn
+{% block title %}Forum evenement
 {% endblock %}
 
 {% block body %}
@@ -24,7 +24,7 @@
 				class="card p-6 fade-in">
 				<!-- Header with topic title -->
 				<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-[var(--border)] pb-4">
-					<h1 class="text-2xl md:text-3xl font-bold gradient-text mb-4 md:mb-0">Question sur le nouveau design system</h1>
+					<h1 class="text-2xl md:text-3xl font-bold gradient-text mb-4 md:mb-0">{{forum.titre}}</h1>
 
 					<div class="flex space-x-3">
 						<span class="px-3 py-1 rounded-full bg-[rgba(133,100,250,0.2)] text-[var(--primary)] flex items-center">
@@ -34,82 +34,26 @@
 					</div>
 				</div>
 
-				<!-- Original post -->
-				<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg mb-8">
-					<div class="flex items-start">
-						<div class="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center mr-4 flex-shrink-0">
-							MK
-						</div>
-						<div class="flex-1">
-							<div class="flex flex-col sm:flex-row sm:items-center mb-2">
-								<h3 class="font-medium text-lg">Marie Keller</h3>
-								<span class="text-xs text-gray-400 sm:ml-4">Posté le 15 juin 2023 à 14:32</span>
-							</div>
-							<div class="text-gray-300">
-								<p class="mb-4">Bonjour à tous,</p>
-								<p class="mb-4">J'ai quelques questions concernant l'implémentation du nouveau design system dans nos projets actuels. Nous avons commencé à l'utiliser sur le projet de refonte du site web, mais nous rencontrons quelques difficultés avec la cohérence des composants.</p>
-								<p class="mb-4">En particulier, les nouveaux composants de formulaire semblent entrer en conflit avec notre bibliothèque de validation existante. Est-ce que quelqu'un a déjà rencontré ce problème et trouvé une solution ?</p>
-								<p>Merci d'avance pour votre aide !</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
 				<!-- Replies section -->
 				<div class="mb-6">
-					<h2 class="text-xl font-semibold mb-4">Réponses (3)</h2>
+					<h2 class="text-xl font-semibold mb-4">Messages ({{ messages|length }})</h2>
 
 					<div
 						class="space-y-6">
+						{% for message in messages %}
 						<!-- Reply 1 -->
 						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg ml-0 md:ml-8">
 							<div class="flex items-start">
 								<div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-4 flex-shrink-0">
-									JD
+									{{ message.membre.prenom[:1]|upper ~ message.membre.nom[:1]|upper }}
 								</div>
 								<div class="flex-1">
 									<div class="flex flex-col sm:flex-row sm:items-center mb-2">
-										<h3 class="font-medium">John Doe</h3>
-										<span class="text-xs text-gray-400 sm:ml-4">Posté le 15 juin 2023 à 15:10</span>
+										<h3 class="font-medium">{{ message.membre.prenom ~ message.membre.nom }}</h3>
+										<span class="text-xs text-gray-400 sm:ml-4">Posté le {{message.dateMessage}}</span>
 									</div>
 									<div class="text-gray-300">
-										<p>Salut Marie, nous avons eu le même problème sur le projet d'application mobile. La solution que nous avons trouvée a été de créer un wrapper autour des composants du design system qui s'occupe de la validation. Je peux te partager notre approche si tu veux.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Reply 2 -->
-						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg ml-0 md:ml-8">
-							<div class="flex items-start">
-								<div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center mr-4 flex-shrink-0">
-									AL
-								</div>
-								<div class="flex-1">
-									<div class="flex flex-col sm:flex-row sm:items-center mb-2">
-										<h3 class="font-medium">Alex Lefebvre</h3>
-										<span class="text-xs text-gray-400 sm:ml-4">Posté le 15 juin 2023 à 16:45</span>
-									</div>
-									<div class="text-gray-300">
-										<p>Je pense qu'il serait utile d'organiser une session de travail sur ce sujet. J'ai préparé une documentation qui explique comment intégrer le design system avec différentes bibliothèques de validation. Je peux la partager lors de la prochaine réunion d'équipe.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Reply 3 -->
-						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg ml-0 md:ml-8">
-							<div class="flex items-start">
-								<div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center mr-4 flex-shrink-0">
-									TS
-								</div>
-								<div class="flex-1">
-									<div class="flex flex-col sm:flex-row sm:items-center mb-2">
-										<h3 class="font-medium">Thomas Schmitt</h3>
-										<span class="text-xs text-gray-400 sm:ml-4">Posté le 16 juin 2023 à 09:12</span>
-									</div>
-									<div class="text-gray-300">
-										<p>Marie, j'ai créé un petit exemple qui montre comment résoudre ce problème. Tu peux le trouver dans le dépôt Git sous "examples/design-system-validation". N'hésite pas à me contacter si tu as des questions.</p>
+										<p>{{message.message}}</p>
 									</div>
 								</div>
 							</div>

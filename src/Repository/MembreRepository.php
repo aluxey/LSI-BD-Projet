@@ -18,6 +18,36 @@ class MembreRepository extends ServiceEntityRepository
     }
 
     /**
+ * @return Membre[] Returns an array of Membre objects
+ */
+public function findAll(): array
+{
+    $conn = $this->getEntityManager()->getConnection();
+
+    $sql = "SELECT m.id as m_id, m.nom as m_nom, m.prenom as m_prenom, m.email as m_email
+            FROM membre as m";
+
+    $stmt = $conn->prepare($sql);
+    $resultSet = $stmt->executeQuery();
+
+    $results = $resultSet->fetchAllAssociative();
+
+    $membres = [];
+
+    foreach ($results as $row) {
+        // Création de l'objet Membre
+        $membre = new Membre();
+        $membre->setId($row['m_id']);
+        $membre->setNom($row['m_nom']);
+        $membre->setPrenom($row['m_prenom']);
+        $membre->setEmail($row['m_email']);
+        $membres[] = $membre;
+    }
+    
+    return $membres;
+}
+
+    /**
      * @return Membre[] Returns an array of Membre objects
      */
     public function findByNameFieldWithPromo($name): array
@@ -98,7 +128,7 @@ class MembreRepository extends ServiceEntityRepository
                         p.id as p_id, p.nom as p_nom
                 FROM membre as m
                 JOIN promo as p on m.promo_id = p.id
-                WHERE id = :id";
+                WHERE m.id = :id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);

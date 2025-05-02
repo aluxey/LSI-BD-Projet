@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Repository\MembreRepository;
 use App\Repository\ProjetRepository;
+use App\Repository\EvenementRepository;
+use App\Repository\ForumEvenementRepository;
+use App\Repository\ForumProjetRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,23 +17,24 @@ class DashboardsController extends AbstractController
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(
         MembreRepository $membreRepository,
-        ProjetRepository $projetRepository
+        ProjetRepository $projetRepository,
+        EvenementRepository $evenementRepository,
+        ForumEvenementRepository $forumEvenementRepository,
+        ForumProjetRepository $forumProjetRepository
     ): Response {
-        $data = [
-            'projects' => $this->getProjects(),
-            'upcomingEvents' => $this->getUpcomingEvents(),
-            'pendingTasks' => $this->getPendingTasks(),
-            'unreadMessages' => $this->getUnreadMessages(),
-            'activeMembers' => $this->getActiveMembers(),
-        ];
 
         $membres = $membreRepository->findAll();
         $projets = $projetRepository->findAll();
+        $events = $evenementRepository->findAll();
+        $fevents = $forumEvenementRepository->findAll();
+        $fprojets = $forumProjetRepository->findAll();
 
         return $this->render('dashboard/index.html.twig', [
-            'data' => $data,
             'membres' => $membres,
             'projets' => $projets,
+            'events' => $events,
+            'forumsEvent' => $fevents,
+            'forumsProjet' => $fprojets,
         ]);
     }
 

@@ -1,10 +1,9 @@
 <div class="space-y-4">
-    <!-- Projet 1 -->
+{% for projet in projets %}
     <div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
         <div class="flex justify-between items-start mb-2">
             <div>
-                <h3 class="font-medium">Refonte du site web</h3>
-                <p class="text-xs text-gray-400">Deadline: 22 Juin 2023</p>
+                <h3 class="font-medium">{{ projet.nom }}</h3>
             </div>
             <div class="flex space-x-2">
                 <button class="text-gray-400 hover:text-white">
@@ -16,116 +15,9 @@
             </div>
         </div>
 
-        <div class="mb-2">
-            <div class="flex justify-between text-xs mb-1">
-                <span>Progression</span>
-                <span>75%</span>
-            </div>
-            <div class="w-full bg-[rgba(24,24,27,0.9)] rounded-full h-2">
-                <div class="bg-[var(--primary)] h-2 rounded-full" style="width: 75%"></div>
-            </div>
-        </div>
-
         <div class="flex justify-between items-center">
-            <div class="flex -space-x-2">
-                <div
-                    class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                    JD</div>
-                <div
-                    class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                    AL</div>
-                <div
-                    class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                    MK</div>
-                <div
-                    class="w-8 h-8 rounded-full bg-[rgba(24,24,27,0.9)] text-gray-400 flex items-center justify-center text-xs border-2 border-[#0B0C0E]">
-                    +2</div>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-[rgba(133,100,250,0.2)] text-[var(--primary)]">En
-                cours</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-[rgba(133,100,250,0.2)] text-[var(--primary)]">{{ projet.theme }}</span>
         </div>
     </div>
-
-    <!-- Projet 2 -->
-    <div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
-        <div class="flex justify-between items-start mb-2">
-            <div>
-                <h3 class="font-medium">Application mobile</h3>
-                <p class="text-xs text-gray-400">Deadline: 15 Juillet 2023</p>
-            </div>
-            <div class="flex space-x-2">
-                <button class="text-gray-400 hover:text-white">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button class="text-gray-400 hover:text-white">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-            </div>
-        </div>
-
-        <div class="mb-2">
-            <div class="flex justify-between text-xs mb-1">
-                <span>Progression</span>
-                <span>30%</span>
-            </div>
-            <div class="w-full bg-[rgba(24,24,27,0.9)] rounded-full h-2">
-                <div class="bg-[var(--primary)] h-2 rounded-full" style="width: 30%"></div>
-            </div>
-        </div>
-
-        <div class="flex justify-between items-center">
-            <div class="flex -space-x-2">
-                <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                    TS</div>
-                <div
-                    class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                    RK</div>
-                <div
-                    class="w-8 h-8 rounded-full bg-[rgba(24,24,27,0.9)] text-gray-400 flex items-center justify-center text-xs border-2 border-[#0B0C0E]">
-                    +3</div>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-[rgba(133,100,250,0.2)] text-[var(--primary)]">En
-                cours</span>
-        </div>
-    </div>
-
-    <!-- Projet 3 -->
-    <div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
-        <div class="flex justify-between items-start mb-2">
-            <div>
-                <h3 class="font-medium">Campagne marketing Q3</h3>
-                <p class="text-xs text-gray-400">Deadline: 1 Août 2023</p>
-            </div>
-            <div class="flex space-x-2">
-                <button class="text-gray-400 hover:text-white">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button class="text-gray-400 hover:text-white">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-            </div>
-        </div>
-
-        <div class="mb-2">
-            <div class="flex justify-between text-xs mb-1">
-                <span>Progression</span>
-                <span>10%</span>
-            </div>
-            <div class="w-full bg-[rgba(24,24,27,0.9)] rounded-full h-2">
-                <div class="bg-[var(--primary)] h-2 rounded-full" style="width: 10%"></div>
-            </div>
-        </div>
-
-        <div class="flex justify-between items-center">
-            <div class="flex -space-x-2">
-                <div
-                    class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                    LM</div>
-                <div
-                    class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center border-2 border-[#0B0C0E]">
-                    PD</div>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-[rgba(229,83,184,0.2)] text-[#E953B8]">Nouveau</span>
-        </div>
-    </div>
+{% endfor %}
 </div>

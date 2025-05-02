@@ -21,6 +21,41 @@ class EvenementRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Evenement[] Returns an array of Evenement objects
+     */
+    public function findAll(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT e.id as e_id, e.nom as e_nom, e.description as e_desc, e.date_event as e_date, fe.id as fe_id, fe.titre as fe_titre
+                FROM evenement as e
+                JOIN forum_evenement as fe ON fe.evenement_id = e.id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        $results = $resultSet->fetchAllAssociative();
+
+        $evenements = [];
+
+        foreach ($results as $row) {
+            // Création de l'objet Evenement
+            $evenement = new Evenement();
+            $evenement->setId($row['e_id']);
+            $evenement->setNom($row['e_nom']);
+            $evenement->setDescription($row['e_desc']);
+            $evenement->setDateEvent(new \DateTime($row['e_date']));
+            $forum_evenement = new ForumEvenement();
+            $forum_evenement->setId($row['fe_id']);
+            $forum_evenement->setTitre($row['fe_titre']);
+            $evenement->setForumEvenement($forum_evenement);
+            $evenements[] = $evenement;
+        }
+
+        return $evenements;
+    }
+
+    /**
      * @return Evenement|null Returns an Evenement object or null
      */
     public function findOneByIdField($id): ?Evenement
@@ -43,7 +78,7 @@ class EvenementRepository extends ServiceEntityRepository
         $evenement->setId($result['e_id']);
         $evenement->setNom($result['e_nom']);
         $evenement->setDescription($result['e_desc']);
-        $evenement->setDateEvent($result['e_date']);
+        $evenement->setDateEvent(new \DateTime($result['e_date']));
         $forum_evenement = new ForumEvenement();
         $forum_evenement->setId($result['fe_id']);
         $forum_evenement->setTitre($result['fe_titre']);
@@ -77,7 +112,7 @@ class EvenementRepository extends ServiceEntityRepository
             $evenement->setId($row['e_id']);
             $evenement->setNom($row['e_nom']);
             $evenement->setDescription($row['e_desc']);
-            $evenement->setDateEvent($row['e_date']);
+            $evenement->setDateEvent(new \DateTime($row['e_date']));
             $forum_evenement = new ForumEvenement();
             $forum_evenement->setId($row['fe_id']);
             $forum_evenement->setTitre($row['fe_titre']);
