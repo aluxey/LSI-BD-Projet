@@ -59,6 +59,19 @@
                             {{ form_errors(register_form.plainPassword) }}
                         </div>
 
+                        <div class="space-y-2">
+                            {{ form_label(register_form.role, 'Rôle', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                            {{ form_widget(register_form.role, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                            {{ form_errors(register_form.role) }}
+                        </div>
+
+                        <div class="space-y-2">
+                            {{ form_label(register_form.promo, 'Promo', {'label_attr': {'class': 'block text-sm text-zinc-400'}}) }}
+                            {{ form_widget(register_form.promo, {'attr': {'class': 'w-full px-4 py-3 bg-black/40 border border-zinc-800 rounded-md'}}) }}
+                            {{ form_errors(register_form.promo) }}
+                        </div>
+
+
                         <div class="flex items-start">
                             {{ form_widget(register_form.agreeTerms, {'attr': {'class': 'h-4 w-4 mt-1 rounded border-zinc-800 bg-black/40 text-[#8564FA]'}}) }}
                             <label for="terms" class="ml-2 block text-sm text-zinc-400">

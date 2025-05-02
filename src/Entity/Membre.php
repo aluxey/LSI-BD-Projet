@@ -90,14 +90,16 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): array
+    public function getRole(): ?string
     {
-        if ($this->role) {
-            return [$this->role];
-        }
-
-        return ['ROLE_USER'];
+        return $this->role;
     }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_' . strtoupper($this->role ?? 'USER')];
+    }
+
 
     public function setRole(?string $role): static
     {
@@ -224,12 +226,6 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getRoles(): array
-    {
-        return ['ROLE_' . strtoupper($this->role ?? 'USER')];
-    }
-
 
     public function getSalt(): ?string
     {
