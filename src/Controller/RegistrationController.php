@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
             // Connexion automatique
             $security->login($user);
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_dashboard');
         }
 
         return $this->render('auth/register.html.twig', [
