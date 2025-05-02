@@ -22,8 +22,9 @@ class ForumProjet
     #[ORM\JoinColumn(nullable: false)]
     private ?Projet $projet = null;
 
-    #[ORM\OneToMany(mappedBy: 'forumProjet', targetEntity: MessageProjet::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'forumProjet', targetEntity: MessageProjet::class)]
     private Collection $messagesProjet;
+
 
     public function __construct()
     {
@@ -100,5 +101,4 @@ class ForumProjet
     {
         return $this->titre ?? 'Forum sans titre'; // Retourne le titre du forum ou une valeur par défaut
     }
-
 }
