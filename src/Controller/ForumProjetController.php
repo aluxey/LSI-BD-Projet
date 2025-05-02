@@ -6,6 +6,7 @@ use App\Repository\MessageEvenementRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class ForumProjetController extends AbstractController
@@ -18,6 +19,16 @@ final class ForumProjetController extends AbstractController
         return $this->render('forums_p/index.html.twig', [
             'forums' => $forums
         ]);
+    }
+
+    #[Route('/forum_p/create/{id}', name: 'app_forum_projet_create', methods: ['POST'])]
+    public function create(
+        int $id, Request $request, ForumProjetRepository $forumProjetRepository): Response
+    {
+        $titre = $request->request->get('forum_name');
+        $forumProjetRepository->createForumProjet($titre, $id);
+        // Rediriger vers la liste des forums ou une page de confirmation
+        return $this->redirectToRoute('app_projects'); // Redirection vers la liste des forums ou une autre page
     }
 
     #[Route('/forum_p/{id}', name: 'app_forums_show_p')]
@@ -40,16 +51,6 @@ final class ForumProjetController extends AbstractController
     public function delete(int $id, ForumProjetRepository $forumProjetRepository): Response
     {
         $forumProjetRepository->deleteForumProjet($id);
-        return $this->redirectToRoute('app_forums_p');
-    }
-
-    #[Route('/forum_p/create/{id}', name: 'app_forum_projet_create', methods: ['POST'])]
-    public function create(
-        int $id, Request $request, ForumProjetRepository $forumProjetRepository): Response
-    {
-        $titre = $request->request->get('project_name');
-        $forumProjetRepository->createForumProjet($titre, $id);
-        // Rediriger vers la liste des forums ou une page de confirmation
-        return $this->redirectToRoute('app_forum_p_list'); // Redirection vers la liste des forums ou une autre page
+        return $this->redirectToRoute('app_projects');
     }
 }

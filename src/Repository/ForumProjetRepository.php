@@ -20,7 +20,7 @@ class ForumProjetRepository extends ServiceEntityRepository
     /**
      * @return ForumProjet Returns the Projet objects
      */
-    public function findById($id): array
+    public function findById($id): ForumProjet
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -31,21 +31,15 @@ class ForumProjetRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
 
-        $results = $resultSet->fetchAllAssociative();
-        // $result = $resultSet->fetchAssociative();
+        // $results = $resultSet->fetchAllAssociative();
+        $result = $resultSet->fetchAssociative();
         
 
-        $forumProjets = [];
-
-        foreach ($results as $row) {
-            // Création de l'objet Projet
-            $forumProjet = new ForumProjet();
-            $forumProjet->setId($row['fp_id']);
-            $forumProjet->setTitre($row['fp_titre']);
-            $forumProjets[] = $forumProjet;
-        }
+        $forumProjet = new ForumProjet();
+        $forumProjet->setId($result['fp_id']);
+        $forumProjet->setTitre($result['fp_titre']);
         
-        return $forumProjets;
+        return $forumProjet;
     }
 
     /**

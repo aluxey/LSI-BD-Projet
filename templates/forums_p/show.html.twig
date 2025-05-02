@@ -65,9 +65,10 @@
 				<!-- Reply form -->
 				<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
 					<h3 class="text-lg font-medium mb-4">Ajouter une réponse</h3>
-					<form>
+					<form method="post" action="{{ path('app_message_projet_create', {id_forum: forum.id, id_membre: app.user.id}) }}">
 						<div class="mb-4">
-							<textarea class="w-full px-3 py-2 bg-[rgba(24,24,27,0.9)] border border-[var(--border)] rounded-md shadow-sm focus:outline-none focus:ring-[var(--primary)] focus:border-[var(--primary)]" rows="4" placeholder="Votre réponse..."></textarea>
+							<textarea
+		name="message" class="w-full px-3 py-2 bg-[rgba(24,24,27,0.9)] border border-[var(--border)] rounded-md shadow-sm focus:outline-none focus:ring-[var(--primary)] focus:border-[var(--primary)]" rows="4" placeholder="Votre réponse..."></textarea>
 						</div>
 						<div class="flex justify-end">
 							<button type="submit" class="btn btn-primary px-4 py-2">
