@@ -1,31 +1,31 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
-    password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+  # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
 
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
-    providers:
-        app_user_provider:
-            entity:
-                class: App\Entity\Membre  # Remplace avec le bon chemin de ton entité
-                property: email  # Le champ par lequel on authentifie l'utilisateur, ici 'email'
+  # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+  providers:
+    app_user_provider:
+      entity:
+        class: App\Entity\Membre # Remplace avec le bon chemin de ton entité
+        property: email # Le champ par lequel on authentifie l'utilisateur, ici 'email'
 
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            lazy: true
-            provider: app_user_provider  # Utilisation de l'entité Membre pour l'authentification
-            form_login:
-                login_path: app_login  # Nom de la route pour la page de login (voir ci-dessous)
-                check_path: app_login  # La route utilisée pour vérifier le formulaire
-                default_target_path: /dashboard
-                # enable_csrf: true  # Protection contre les attaques CSRF
-            access_denied_handler: App\Security\AccessDeniedHandler
-            logout:
-                path: app_logout  # Nom de la route pour la déconnexion
-                target: /  # Redirection après déconnexion
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      lazy: true
+      provider: app_user_provider # Utilisation de l'entité Membre pour l'authentification
+      form_login:
+        login_path: app_login # Nom de la route pour la page de login (voir ci-dessous)
+        check_path: app_login # La route utilisée pour vérifier le formulaire
+        default_target_path: app_dashboard
+        # enable_csrf: true  # Protection contre les attaques CSRF
+      access_denied_handler: App\Security\AccessDeniedHandler
+      logout:
+        path: app_logout # Nom de la route pour la déconnexion
+        target: / # Redirection après déconnexion
 
-    access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+  access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }

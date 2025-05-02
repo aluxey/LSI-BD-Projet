@@ -31,9 +31,8 @@
 							<div class="flex items-center p-3 rounded-md bg-[rgba(24,24,27,0.7)] hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
 								<div class="w-2 h-full min-h-[40px] bg-[var(--primary)] rounded-full mr-3"></div>
 								<div class="flex-1">
-									<a href="/event/{{event.id}}">
-										<p class="font-medium hover:underline">{{event.nom}}</p>
-									</a>
+									<a href="event/{{ event.id }}" class="font-medium hover:underline">{{ event.nom }}</a>
+									<p class="text-xs text-gray-400">{{ event.dateEvent|date('Y-m-d H:i') }}</p>
 								</div>
 								<button class="text-gray-400 hover:text-white p-1">
 									<i class="fas fa-ellipsis-v"></i>
