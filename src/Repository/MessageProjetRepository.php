@@ -128,7 +128,7 @@ class MessageProjetRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE message_projet WHERE id = :id";
+        $sql = "DELETE FROM message_projet WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);

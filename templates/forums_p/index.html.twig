@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forums - Assosquare
+{% endblock %}
+
+{% block body %}
+	<div class="min-h-screen bg-[#0B0C0E] text-white">
+		{% include 'components/header.html.twig' %}
+
+		<main class="container mx-auto px-4 py-8">
+			<div class="flex flex-col md:flex-row justify-between items-center mb-8">
+				<h1 class="text-3xl font-bold gradient-text">Forums</h1>
+				<div class="flex space-x-4 mt-4 md:mt-0">
+					{% if is_granted('ROLE_ADMIN') %}
+						<button class="btn btn-secondary px-4 py-2">
+							<i class="fas fa-users mr-2"></i>
+							Gérer les membres
+						</button>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="space-y-4">
+				<div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+					{% for forum in forums %}
+						<div class="bg-[rgba(24,24,27,0.6)] border border-zinc-700 rounded-lg p-4 hover:bg-[rgba(24,24,27,0.85)] transition cursor-pointer">
+							<div class="flex items-start">
+								<div class="w-10 h-10 rounded-full flex items-center justify-center mr-3 text-white">
+									{{ forum.titre }}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</main>
+
+		{# {% include '/forums/modals/_create.html.twig' %} #}
+
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('dashboard.js') }}"></script>
+
+	<script>
+		function toggleModal() {
+const modal = document.getElementById('createForumModal');
+modal.classList.toggle('hidden');
+modal.classList.toggle('flex');
+}
+	</script>
+{% endblock %}

@@ -201,7 +201,7 @@ public function findAll(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE membre WHERE id = :id";
+        $sql = "DELETE FROM membre WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);

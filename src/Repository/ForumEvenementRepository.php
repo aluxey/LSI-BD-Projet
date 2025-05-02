@@ -150,7 +150,7 @@ class ForumEvenementRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE forum_evenement WHERE id = :id";
+        $sql = "DELETE FROM forum_evenement WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);

@@ -129,7 +129,7 @@ class MessageEvenementRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE message_evenement WHERE id = :id";
+        $sql = "DELETE FROM message_evenement WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);

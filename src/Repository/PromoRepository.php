@@ -102,7 +102,7 @@ class PromoRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE promo WHERE id = :id";
+        $sql = "DELETE FROM promo WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);

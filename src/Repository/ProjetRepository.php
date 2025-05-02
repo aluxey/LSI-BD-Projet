@@ -151,17 +151,28 @@ class ProjetRepository extends ServiceEntityRepository
     public function createProjet($nom, $description, $date_event): int
     {
         $conn = $this->getEntityManager()->getConnection();
-
-        $sql = "INSERT INTO projet (nom, description, date_event) VALUES (:nom, :description, :date_event)";
-
-        $stmt = $conn->prepare($sql);
+    
+        // 1. Insérer le projet
+        $sqlProjet = "INSERT INTO projet (nom, description, date_event) VALUES (:nom, :description, :date_event)";
+        $stmt = $conn->prepare($sqlProjet);
         $stmt->executeStatement([
-            'nom' => $name,
+            'nom' => $nom,
             'description' => $description,
             'date_event' => $date_event
         ]);
-
-        return $conn->lastInsertId();
+    
+        // Récupérer l'ID du projet inséré
+        $projetId = $conn->lastInsertId();
+    
+        // 2. Créer le forum lié
+        $sqlForum = "INSERT INTO forum_projet (titre, projet_id) VALUES (:titre, :projet_id)";
+        $stmtForum = $conn->prepare($sqlForum);
+        $stmtForum->executeStatement([
+            'titre' => 'Forum pour ' . $nom,
+            'projet_id' => $projetId
+        ]);
+    
+        return $projetId;
     }
 
     /**
@@ -234,7 +245,7 @@ class ProjetRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE membre_projet WHERE projet_id = :projet_id AND membre_id = :membre_id";
+        $sql = "DELETE FROM membre_projet WHERE projet_id = :projet_id AND membre_id = :membre_id";
 
         $stmt = $conn->prepare($sql);
         $rowsAffected = 
