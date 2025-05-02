@@ -20,13 +20,13 @@ class MessageProjet
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateMessage = null;
 
-    #[ORM\ManyToOne(targetEntity: ForumProjet::class, inversedBy: 'messages')]
+    #[ORM\ManyToOne(targetEntity: ForumProjet::class, inversedBy: 'messagesProjet')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ForumProjet $forumProjet = null;
 
-    #[ORM\ManyToOne(targetEntity: Membre::class, inversedBy: 'messageProjets')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Membre::class, inversedBy: 'messagesProjet')]
     private ?Membre $membre = null;
+
 
     public function getId(): ?int
     {
