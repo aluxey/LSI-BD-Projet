@@ -29,7 +29,7 @@ class EvenementRepository extends ServiceEntityRepository
 
         $sql = "SELECT e.id as e_id, e.nom as e_nom, e.description as e_desc, e.date_event as e_date, fe.id as fe_id, fe.titre as fe_titre
                 FROM evenement as e
-                JOIN forum_evenement as fe ON fe.evenement_id = e.id";
+                LEFT JOIN forum_evenement as fe ON fe.evenement_id = e.id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
@@ -45,10 +45,12 @@ class EvenementRepository extends ServiceEntityRepository
             $evenement->setNom($row['e_nom']);
             $evenement->setDescription($row['e_desc']);
             $evenement->setDateEvent(new \DateTime($row['e_date']));
-            $forum_evenement = new ForumEvenement();
-            $forum_evenement->setId($row['fe_id']);
-            $forum_evenement->setTitre($row['fe_titre']);
-            $evenement->setForumEvenement($forum_evenement);
+            if (!is_null($row['fe_id'])) {
+                $forum_evenement = new ForumEvenement();
+                $forum_evenement->setId((int)$row['fe_id']);
+                $forum_evenement->setTitre($row['fe_titre']);
+                $evenement->setForumEvenement($forum_evenement);
+            }
             $evenements[] = $evenement;
         }
 
@@ -123,6 +125,7 @@ class EvenementRepository extends ServiceEntityRepository
         return $evenements;
     }
 
+        
     /**
      * @return int Returns the id of the Evenement created
      */
@@ -130,16 +133,27 @@ class EvenementRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "INSERT INTO evenement (nom, description, date_event) VALUES (:nom, :description, :date_event)";
-
-        $stmt = $conn->prepare($sql);
+        // 1. Insérer l'événement
+        $sqlEvenement = "INSERT INTO evenement (nom, description, date_event) VALUES (:nom, :description, :date_event)";
+        $stmt = $conn->prepare($sqlEvenement);
         $stmt->executeStatement([
             'nom' => $nom,
             'description' => $description,
             'date_event' => $date_event
         ]);
 
-        return $conn->lastInsertId();
+        // Récupérer l'ID de l'événement inséré
+        $evenementId = $conn->lastInsertId();
+
+        // 2. Créer le forum lié
+        $sqlForum = "INSERT INTO forum_evenement (titre, evenement_id) VALUES (:titre, :evenement_id)";
+        $stmtForum = $conn->prepare($sqlForum);
+        $stmtForum->executeStatement([
+            'titre' => 'Forum pour ' . $nom,
+            'evenement_id' => $evenementId
+        ]);
+
+        return $evenementId;
     }
 
     /**
@@ -152,14 +166,12 @@ class EvenementRepository extends ServiceEntityRepository
         $sql = "UPDATE evenement SET nom = :nom, description = :description, date_event = :date_event WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
-        $rowsAffected = $stmt->executeStatement([
+        return $stmt->executeStatement([
             'id' => $id,
             'nom' => $nom,
             'description' => $description,
             'date_event' => $date_event
         ]);
-
-        return $rowsAffected;
     }
 
     /**
@@ -169,7 +181,7 @@ class EvenementRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE evenement WHERE id = :id";
+        $sql = "DELETE FROM evenement WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);
