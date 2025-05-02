@@ -27,7 +27,12 @@
                 <a href="{{ path('app_forums') }}"
                     class="{% if app.request.attributes.get('_route') == 'app_forums' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Forum</a>
                 {% if is_granted('ROLE_ADMIN') %}
-                <a href="#" class="text-gray-400 hover:text-white transition">Administration</a>
+
+                <a href="{{ path('admin') }}"
+                        class="{% if app.request.attributes.get('_route') starts with 'admin' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">
+                    Administration
+                </a>
+
                 {% endif %}
             </nav>
         </div>
