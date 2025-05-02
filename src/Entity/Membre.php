@@ -95,7 +95,7 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->role) {
             return [$this->role];
         }
-    
+
         return ['ROLE_USER'];
     }
 
@@ -143,20 +143,21 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMessageProjets(): Collection
+    public function getMessagesProjet(): Collection
     {
         return $this->messagesProjet;
     }
 
-    public function addMessageProjet(MessageProjet $messageProjet): self
+    public function addMessageProjet(MessageProjet $message): static
     {
-        if (!$this->messagesProjet->contains($messageProjet)) {
-            $this->messagesProjet[] = $messageProjet;
-            $messageProjet->setMembre($this);
+        if (!$this->messagesProjet->contains($message)) {
+            $this->messagesProjet[] = $message;
+            $message->setMembre($this);
         }
 
         return $this;
     }
+
 
     public function removeMessageProjet(MessageProjet $messageProjet): self
     {
@@ -244,5 +245,4 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->prenom . ' ' . $this->nom; // Par exemple, afficher le prénom et le nom
     }
-
 }

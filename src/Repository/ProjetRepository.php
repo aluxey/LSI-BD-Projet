@@ -6,6 +6,7 @@ use App\Entity\Projet;
 use App\Entity\Membre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Promo;
 
 /**
  * @extends ServiceEntityRepository<Projet>
@@ -43,7 +44,7 @@ class ProjetRepository extends ServiceEntityRepository
             $projet->setType($row['p_type']);
             $projets[] = $projet;
         }
-        
+
         return $projets;
     }
 
@@ -74,7 +75,7 @@ class ProjetRepository extends ServiceEntityRepository
             $projet->setDateEvent($row['p_date']);
             $projets[] = $projet;
         }
-        
+
         return $projets;
     }
 
@@ -101,7 +102,7 @@ class ProjetRepository extends ServiceEntityRepository
         $projet->setNom($result['p_nom']);
         $projet->setDescription($result['p_desc']);
         $projet->setDateEvent(new \DateTime($result['p_date']));
-        
+
         return $projet;
     }
 
@@ -141,8 +142,21 @@ class ProjetRepository extends ServiceEntityRepository
             $membre->setPromo($promo);
             $membres[] = $membre;
         }
-        
+
         return $membres;
+    }
+
+    public function findMembresByProjetId(int $id): array
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT DISTINCT m
+             FROM App\Entity\Membre m
+             JOIN m.projets p
+             WHERE p.id = :id'
+            )
+            ->setParameter('id', $id)
+            ->getResult();
     }
 
     /**
@@ -156,7 +170,7 @@ class ProjetRepository extends ServiceEntityRepository
 
         $stmt = $conn->prepare($sql);
         $stmt->executeStatement([
-            'nom' => $name,
+            'nom' => $nom,
             'description' => $description,
             'date_event' => $date_event
         ]);
@@ -176,7 +190,7 @@ class ProjetRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement([
             'id' => $id,
-            'nom' => $name,
+            'nom' => $nom,
             'description' => $description,
             'date_event' => $date_event
         ]);
@@ -237,11 +251,11 @@ class ProjetRepository extends ServiceEntityRepository
         $sql = "DELETE membre_projet WHERE projet_id = :projet_id AND membre_id = :membre_id";
 
         $stmt = $conn->prepare($sql);
-        $rowsAffected = 
-        $stmt->executeStatement([
-            'projet_id' => $idProjet,
-            'membre_id' => $idMembre
-        ]);
+        $rowsAffected =
+            $stmt->executeStatement([
+                'projet_id' => $idProjet,
+                'membre_id' => $idMembre
+            ]);
 
         return $rowsAffected;
     }

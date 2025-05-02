@@ -22,9 +22,10 @@ class MessageEvenement
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateMessage = null;
 
-    #[ORM\ManyToOne(targetEntity: Membre::class, inversedBy: 'messageEvenements')]
+    #[ORM\ManyToOne(targetEntity: Membre::class, inversedBy: 'messagesEvenement')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Membre $membre = null;
+
 
     public function getId(): ?int
     {

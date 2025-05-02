@@ -26,7 +26,7 @@ final class ProjectsController extends AbstractController
         ProjetRepository $projetRepository): Response
     {
         $projet = $projetRepository->findOneByIdField($id);
-        $membres = $projetRepository->findMembresByIdField($id);
+        $membres = $projetRepository->findMembresByProjetId($id);
 
         return $this->render('projects/show.html.twig', [
             'projet' => $projet,
