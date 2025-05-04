@@ -26,7 +26,7 @@
                     <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center">
                         {{ app.user.prenom[:1]|upper ~ app.user.nom[:1]|upper }}
                     </div>
-                    <span class="hidden md:block">{{ app.user.prenom ~ app.user.nom }}</span>
+                    <span class="hidden md:block">{{ app.user.prenom ~ ' ' ~ app.user.nom }}</span>
                     <i class="fas fa-chevron-down text-xs text-gray-400"></i>
                 </button>
 

@@ -27,6 +27,13 @@ class Evenement
     #[ORM\OneToOne(mappedBy: 'evenement', cascade: ['persist', 'remove'])]
     private ?ForumEvenement $forumEvenement = null;
 
+    public function __construct()
+    {
+        if ($this->dateEvent === null) {
+            $this->dateEvent = new \DateTime();
+        }
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,5 +92,10 @@ class Evenement
         $this->forumEvenement = $forumEvenement;
         
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->nom ?? 'Événement sans nom';
     }
 }

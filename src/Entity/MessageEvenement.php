@@ -26,6 +26,9 @@ class MessageEvenement
     #[ORM\JoinColumn(nullable: false)]
     private ?Membre $membre = null;
 
+    #[ORM\ManyToOne(inversedBy: 'messagesEvenement')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ForumEvenement $forumEvenement = null;
 
     public function getId(): ?int
     {
@@ -75,10 +78,6 @@ class MessageEvenement
         return $this;
     }
 
-    #[ORM\ManyToOne(inversedBy: 'messagesEvenement')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?ForumEvenement $forumEvenement = null;
-
     public function getForumEvenement(): ?ForumEvenement
     {
         return $this->forumEvenement;
@@ -88,5 +87,10 @@ class MessageEvenement
     {
         $this->forumEvenement = $forumEvenement;
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->message ?? 'Message Evenement';
     }
 }

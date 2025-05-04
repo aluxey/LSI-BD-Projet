@@ -23,6 +23,7 @@ class MessageEvenementCrudController extends AbstractCrudController
             TextField::new('message'),
             DateField::new('dateMessage'),
             AssociationField::new('membre'),
+            AssociationField::new('forumEvenement')
         ];
     }
 }

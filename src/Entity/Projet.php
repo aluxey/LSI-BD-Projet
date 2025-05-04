@@ -41,6 +41,9 @@ class Projet
     {
         $this->forumProjets = new ArrayCollection();
         $this->membres = new ArrayCollection();
+        if ($this->dateEvent === null) {
+            $this->dateEvent = new \DateTime();
+        }
     }
 
     public function getId(): ?int
