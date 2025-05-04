@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forums - Assosquare
+{% endblock %}
+
+{% block body %}
+	<div class="min-h-screen bg-[#0B0C0E] text-white">
+		{% include 'components/header.html.twig' %}
+
+		<main class="container mx-auto px-4 py-8">
+			<div class="flex flex-col md:flex-row justify-between items-center mb-8">
+				<h1 class="text-3xl font-bold gradient-text">Forums</h1>
+				<div class="flex space-x-4 mt-4 md:mt-0">
+					{% if is_granted('ROLE_ADMIN') %}
+						<button class="btn btn-secondary px-4 py-2">
+							<i class="fas fa-users mr-2"></i>
+							Gérer les membres
+						</button>
+					{% endif %}
+				</div>
+			</div>
+
+			<h3 class="text-sm font-medium text-gray-300 mb-3">Forums évènement</h3>
+			<div class="space-y-3">
+				{% for forum in forumsEvent %}
+					<a href="{{ path('app_forums_show', {'id': forum.id}) }}">
+						<div class="flex items-center p-3 rounded-md bg-[rgba(24,24,27,0.7)] hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
+							<div class="w-2 h-full min-h-[40px] bg-[var(--primary)] rounded-full mr-3"></div>
+							<div class="flex-1">
+								<div class="font-medium hover:underline">{{ forum.titre }}</div>
+							</div>
+							<button class="text-gray-400 hover:text-white p-1">
+								<i class="fas fa-ellipsis-v"></i>
+							</button>
+						</div>
+					</a>
+				{% endfor %}
+			</div>
+			<h3 class="text-sm font-medium text-gray-300 mb-3">Forums projet</h3>
+			<div class="space-y-3">
+				{% for forum in forumsProjet %}
+					<a href="{{ path('app_forums_show_p', {'id': forum.id}) }}">
+						<div class="flex items-center p-3 rounded-md bg-[rgba(24,24,27,0.7)] hover:bg-[rgba(24,24,27,0.9)] cursor-pointer">
+							<div class="w-2 h-full min-h-[40px] bg-[var(--primary)] rounded-full mr-3"></div>
+							<div class="flex-1">
+								<div class="font-medium hover:underline">{{ forum.titre }}</div>
+							</div>
+							<button class="text-gray-400 hover:text-white p-1">
+								<i class="fas fa-ellipsis-v"></i>
+							</button>
+						</div>
+					</a>
+				{% endfor %}
+			</div>
+		</main>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('dashboard.js') }}"></script>
+
+	<script>
+		function toggleModal() {
+const modal = document.getElementById('createForumModal');
+modal.classList.toggle('hidden');
+modal.classList.toggle('flex');
+}
+	</script>
+{% endblock %}

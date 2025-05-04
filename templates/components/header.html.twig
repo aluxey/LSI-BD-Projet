@@ -16,7 +16,7 @@
 				<a href="{{ path('app_projects') }}" class="{% if app.request.attributes.get('_route') == 'app_projects' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Projets</a>
 				<a href="{{ path('app_events') }}" class="{% if app.request.attributes.get('_route') == 'app_events' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Événements</a>
 
-				<a href="{{ path('app_forums') }}" class="{% if app.request.attributes.get('_route') == 'app_forums' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Forum</a>
+				<a href="{{ path('app_forums_all') }}" class="{% if app.request.attributes.get('_route') == 'app_forums' %} text-white hover:text-[var(--primary)] {% else %} text-gray-400 hover:text-white {% endif %} transition">Forum</a>
 			</nav>
 		</div>
 

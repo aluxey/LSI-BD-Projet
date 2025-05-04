@@ -106,14 +106,11 @@ class ProjetRepository extends ServiceEntityRepository
         return $projet;
     }
 
-    /**
-     * @return Membre[] Returns an array of Projet objects
-     */
-    public function findMembresByIdField($id): array
+    public function findMembresByProjetId(int $id): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT m.id as m_id, m.nom as m_nom, m.prenom as m_prenom, m.email as m_mail, m.password as m_mdp, m.role as m_role,
+        $sql = "SELECT m.id as m_id, m.nom as m_nom, m.prenom as m_prenom, m.role as m_role,
                         p.id as p_id, p.nom as p_nom
                 FROM membre_projet as mp
                 JOIN membre as m ON mp.membre_id = m.id
@@ -132,10 +129,8 @@ class ProjetRepository extends ServiceEntityRepository
             $membre = new Membre();
             $membre->setId($row['m_id']);
             $membre->setNom($row['m_nom']);
-            $membre->setNom($row['m_prenom']);
-            $membre->setNom($row['m_mail']);
-            $membre->setNom($row['m_mdp']);
-            $membre->setNom($row['m_role']);
+            $membre->setPrenom($row['m_prenom']);
+            $membre->setRole($row['m_role']);
             $promo = new Promo();
             $promo->setId($row['p_id']);
             $promo->setNom($row['p_nom']);
@@ -144,19 +139,6 @@ class ProjetRepository extends ServiceEntityRepository
         }
 
         return $membres;
-    }
-
-    public function findMembresByProjetId(int $id): array
-    {
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT DISTINCT m
-             FROM App\Entity\Membre m
-             JOIN m.projets p
-             WHERE p.id = :id'
-            )
-            ->setParameter('id', $id)
-            ->getResult();
     }
 
     /**
@@ -199,14 +181,12 @@ class ProjetRepository extends ServiceEntityRepository
         $sql = "UPDATE projet SET nom = :nom, description = :description, date_event = :date_event WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
-        $rowsAffected = $stmt->executeStatement([
+        return $stmt->executeStatement([
             'id' => $id,
             'nom' => $nom,
             'description' => $description,
             'date_event' => $date_event
         ]);
-
-        return $rowsAffected;
     }
 
     /**
@@ -217,8 +197,7 @@ class ProjetRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "DELETE FROM message_projet WHERE forum_projet_id IN (
-            SELECT id FROM forum_projet WHERE projet_id = :id
-        );";
+                SELECT id FROM forum_projet WHERE projet_id = :id);";
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);
 

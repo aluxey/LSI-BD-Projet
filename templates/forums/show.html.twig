@@ -9,15 +9,10 @@
 
 		<main class="container mx-auto px-24 py-8">
 			<div class="flex flex-row md:flex-row justify-between mb-6">
-				<a href="{{ path('app_forums') }}" class="text-gray-400 hover:text-white flex items-center">
+				<a href="{{ path('app_event_show', {id: forum.id}) }}" class="text-gray-400 hover:text-white flex items-center">
 					<i class="fas fa-arrow-left mr-2"></i>
-					Retour à la liste des forums
+					Retour à la liste des forums de l'évènement
 				</a>
-
-				<button type="button" class="btn btn-secondary px-4 py-2" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer ce forum?')) { document.getElementById('delete-form').submit(); }">
-					<i class="fas fa-trash-alt mr-2"></i>
-					Supprimer
-				</button>
 			</div>
 
 			<div
@@ -38,35 +33,32 @@
 				<div class="mb-6">
 					<h2 class="text-xl font-semibold mb-4">Messages ({{ messages|length }})</h2>
 
-					<div
-						class="space-y-6">
+					<div class="space-y-6">
 						{% for message in messages %}
 						<!-- Reply 1 -->
 						<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg ml-0 md:ml-8">
 							<div class="flex items-start">
 								<div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-4 flex-shrink-0">
-									{{ message.membre.prenom[:1]|upper ~ message.membre.nom[:1]|upper }}
+									{{ message.membre.prenom[:1]|upper ~ ' ' ~ message.membre.nom[:1]|upper }}
 								</div>
 								<div class="flex-1">
-									<div class="flex flex-col sm:flex-row sm:items-center mb-2">
-										<h3 class="font-medium">{{ message.membre.prenom ~ message.membre.nom }}</h3>
-										<span class="text-xs text-gray-400 sm:ml-4">Posté le {{message.dateMessage}}</span>
-									</div>
 									<div class="text-gray-300">
 										<p>{{message.message}}</p>
 									</div>
 								</div>
 							</div>
 						</div>
+						{% endfor %}
 					</div>
 				</div>
 
 				<!-- Reply form -->
 				<div class="bg-[rgba(24,24,27,0.7)] p-6 rounded-lg">
 					<h3 class="text-lg font-medium mb-4">Ajouter une réponse</h3>
-					<form>
+					<form method="post" action="{{ path('app_message_event_create', {id_forum: forum.id, id_membre: app.user.id}) }}">
 						<div class="mb-4">
-							<textarea class="w-full px-3 py-2 bg-[rgba(24,24,27,0.9)] border border-[var(--border)] rounded-md shadow-sm focus:outline-none focus:ring-[var(--primary)] focus:border-[var(--primary)]" rows="4" placeholder="Votre réponse..."></textarea>
+							<textarea
+		name="message" class="w-full px-3 py-2 bg-[rgba(24,24,27,0.9)] border border-[var(--border)] rounded-md shadow-sm focus:outline-none focus:ring-[var(--primary)] focus:border-[var(--primary)]" rows="4" placeholder="Votre réponse..."></textarea>
 						</div>
 						<div class="flex justify-end">
 							<button type="submit" class="btn btn-primary px-4 py-2">

@@ -20,13 +20,13 @@ class ForumEvenementRepository extends ServiceEntityRepository
     /**
      * @return ForumEvenement Returns the Evenement objects
      */
-    public function findByEvenementIdField($id): array
+    public function findByEvenementIdField($id): ForumEvenement
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "SELECT fe.id as fe_id, fe.titre as fe_titre
                 FROM forum_evenement as fe
-                JOIN evenement as e ON forum_evenement.evenement_id = evenement.id
+                JOIN evenement as e ON fe.evenement_id = e.id
                 WHERE e.id = :id";
 
         $stmt = $conn->prepare($sql);
@@ -51,7 +51,8 @@ class ForumEvenementRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "SELECT fe.id as fe_id, fe.titre as fe_titre
-                FROM forum_evenement as fe";
+                FROM forum_evenement as fe
+                JOIN evenement as e ON e.id = fe.evenement_id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
@@ -67,6 +68,7 @@ class ForumEvenementRepository extends ServiceEntityRepository
             $forumEvenement = new ForumEvenement();
             $forumEvenement->setId($row['fe_id']);
             $forumEvenement->setTitre($row['fe_titre']);
+            $forumEvenements[] = $forumEvenement;
         }
         
         return $forumEvenements;

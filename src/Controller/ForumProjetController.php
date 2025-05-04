@@ -28,7 +28,7 @@ final class ForumProjetController extends AbstractController
         $titre = $request->request->get('forum_name');
         $forumProjetRepository->createForumProjet($titre, $id);
         // Rediriger vers la liste des forums ou une page de confirmation
-        return $this->redirectToRoute('app_projects'); // Redirection vers la liste des forums ou une autre page
+        return $this->redirectToRoute('app_project_show', ['id' => $id]); // Redirection vers la liste des forums ou une autre page
     }
 
     #[Route('/forum_p/{id}', name: 'app_forums_show_p')]

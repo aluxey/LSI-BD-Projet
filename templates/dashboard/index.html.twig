@@ -29,9 +29,6 @@
 					<div class="card p-6 fade-in">
 						<div class="flex justify-between items-center mb-4">
 							<h2 class="text-xl font-semibold">Calendrier des événements</h2>
-							<div class="flex space-x-2">
-								<button class="btn btn-primary px-3 py-1 text-sm" onclick="toggleModal('createEventModal')">Nouvel événement</button>
-							</div>
 						</div>
 						{% include 'dashboard/widgets/_events.html.twig' %}
 
@@ -47,10 +44,6 @@
 					<div class="card p-6 fade-in" style="animation-delay: 0.1s">
 						<div class="flex justify-between items-center mb-4">
 							<h2 class="text-xl font-semibold">Projets en cours</h2>
-							<button class="btn btn-primary px-3 py-1 text-sm" onclick="toggleModal('createProjectModal')">
-								<i class="fas fa-plus mr-1"></i>
-								Nouveau projet
-							</button>
 						</div>
 						{% include 'dashboard/widgets/_projects.html.twig' %}
 
@@ -89,7 +82,7 @@
 						{% include 'dashboard/widgets/_forums.html.twig' %}
 
 						<div class="mt-4 text-center">
-							<a class="text-sm text-gray-400 hover:text-white" href="{{ path('app_forums') }}">
+							<a class="text-sm text-gray-400 hover:text-white" href="{{ path('app_forums_all') }}">
 								Voir tous les forums
 								<i class="fas fa-arrow-right ml-1"></i>
 							</a>

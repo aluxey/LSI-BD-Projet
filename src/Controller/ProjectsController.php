@@ -55,4 +55,15 @@ final class ProjectsController extends AbstractController
         $rowsAffected = $projetRepository->deleteProjet($id);
         return $this->redirectToRoute('app_projects');
     }
+
+    #[Route('/project/{id}/update', name: 'app_project_update', methods: ['POST'])]
+    public function update(int $id, Request $request, ProjetRepository $projetRepository): Response
+    {
+        $name = $request->request->get('project_name');
+        $description = $request->request->get('project_description');
+        $date = $request->request->get('project_deadline');
+        $projetRepository->updateProjet($id, $name, $description, $date);
+
+        return $this->redirectToRoute('app_project_show', ['id' => $id]);
+    }
 }

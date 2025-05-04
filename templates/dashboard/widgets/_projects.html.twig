@@ -1,5 +1,5 @@
 <div class="space-y-4">
-	{% for projet in projets %}
+	{% for projet in projets|slice(0, 3) %}
 		<div class="bg-[rgba(24,24,27,0.7)] p-4 rounded-lg">
 			<div class="flex justify-between items-start mb-2">
 				<div>

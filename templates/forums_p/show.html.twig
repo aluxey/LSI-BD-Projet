@@ -9,15 +9,10 @@
 
 		<main class="container mx-auto px-24 py-8">
 			<div class="flex flex-row md:flex-row justify-between mb-6">
-				<a href="{{ path('app_forums') }}" class="text-gray-400 hover:text-white flex items-center">
+				<a href="{{ path('app_project_show', {id: forum.id}) }}" class="text-gray-400 hover:text-white flex items-center">
 					<i class="fas fa-arrow-left mr-2"></i>
-					Retour à la liste des forums
+					Retour à la liste des forums du projet
 				</a>
-
-				<button type="button" class="btn btn-secondary px-4 py-2" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer ce forum?')) { document.getElementById('delete-form').submit(); }">
-					<i class="fas fa-trash-alt mr-2"></i>
-					Supprimer
-				</button>
 			</div>
 
 			<div

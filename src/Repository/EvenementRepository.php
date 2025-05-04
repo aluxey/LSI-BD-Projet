@@ -135,9 +135,6 @@ class EvenementRepository extends ServiceEntityRepository
         // 1. Insérer l'événement
         $sqlEvenement = "INSERT INTO evenement (nom, description, date_event) VALUES (:nom, :description, :date_event)";
         $stmt = $conn->prepare($sqlEvenement);
-        // 1. Insérer l'événement
-        $sqlEvenement = "INSERT INTO evenement (nom, description, date_event) VALUES (:nom, :description, :date_event)";
-        $stmt = $conn->prepare($sqlEvenement);
         $stmt->executeStatement([
             'nom' => $nom,
             'description' => $description,
@@ -195,9 +192,16 @@ class EvenementRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "DELETE FROM evenement WHERE id = :id";
-        $sql = "DELETE FROM evenement WHERE id = :id";
+        $sql = "DELETE FROM message_evenement WHERE forum_evenement_id IN (
+                SELECT id FROM forum_evenement WHERE evenement_id = :id)";
+        $stmt = $conn->prepare($sql);
+        $rowsAffected = $stmt->executeStatement(['id' => $id]);
 
+        $sql = "DELETE FROM forum_evenement WHERE evenement_id = :id";
+        $stmt = $conn->prepare($sql);
+        $rowsAffected = $stmt->executeStatement(['id' => $id]);
+
+        $sql = "DELETE FROM evenement WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $rowsAffected = $stmt->executeStatement(['id' => $id]);
 

@@ -19,18 +19,27 @@ final class EventsController extends AbstractController
             'events' => $events
         ]);
     }
+
+    #[Route('/event/create', name: 'app_event_create', methods: ['POST'])]
+    public function create(Request $request, EvenementRepository $evenementRepository): Response
+    {
+        $name = $request->request->get('event_name');
+        $description = $request->request->get('event_description');
+        $date = $request->request->get('event_date');
+        $evenementRepository->createEvenement($name, $description, $date);
+
+        return $this->redirectToRoute('app_events');
+    }
     
 
     #[Route('/event/{id}', name: 'app_event_show', requirements: ['id' => '\d+'])]
     public function show(int $id, EvenementRepository $evenementRepository, ForumEvenementRepository $forumEvenementRepository): Response
     {
         $event = $evenementRepository->findOneByIdField($id);
-        $membres = $projetRepository->findMembresByProjetId($id);
-        $forums = $forumEvenementRepository->findByProjetIdField($id);
+        $forum = $forumEvenementRepository->findByEvenementIdField($id);
         return $this->render('events/show.html.twig', [
             'event' => $event,
-            'membres' => $membres,
-            'forums' => $forums
+            'forum' => $forum
         ]);
     }
 
@@ -42,14 +51,14 @@ final class EventsController extends AbstractController
         return $this->redirectToRoute('app_events');
     }
 
-    #[Route('/event/create', name: 'app_event_create', methods: ['POST'])]
-    public function create(Request $request, EvenementRepository $evenementRepository): Response
+    #[Route('/event/{id}/update', name: 'app_event_update', methods: ['POST'])]
+    public function update(int $id, Request $request, EvenementRepository $evenementRepository): Response
     {
         $name = $request->request->get('event_name');
         $description = $request->request->get('event_description');
         $date = $request->request->get('event_date');
-        $evenementRepository->createEvenement($name, $description, $date);
+        $evenementRepository->updateEvenement($id, $name, $description, $date);
 
-        return $this->redirectToRoute('app_events');
+        return $this->redirectToRoute('app_event_show', ['id' => $id]);
     }
 }
