@@ -13,6 +13,15 @@ Ce projet vise à développer une plateforme web destinée à une association é
 
 ---
 
+## 📍 Commandes pour lancer le projet 
+
+- composer install
+- npm install
+- npm run dev
+- symfony server // cette commande lance le serveur ainsi que le projet souvent à l'adresse 127.0.0.1
+
+---
+
 ## 🚀 Fonctionnalités Principales
 
 - Authentification (inscription, connexion, rôles)
