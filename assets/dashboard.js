@@ -173,7 +173,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function toggleModal(modalName) {
-    const modal = document.getElementById(modalName);
-    modal.classList.toggle('hidden');
-    modal.classList.toggle('flex');
+	const modal = document.getElementById(modalName);
+	if (!modal) return;
+
+	if (modal.classList.contains('hidden')) {
+		modal.classList.remove('hidden');
+		modal.classList.add('flex');
+	} else {
+		modal.classList.add('hidden');
+		modal.classList.remove('flex');
+	}
 }

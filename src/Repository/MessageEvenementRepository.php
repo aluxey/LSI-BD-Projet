@@ -38,7 +38,7 @@ class MessageEvenementRepository extends ServiceEntityRepository
         // Création de l'objet MessageEvenement
         $message = new MessageEvenement();
         $message->setId($result['me_id']);
-        $message->setNom($result['me_date_message']);
+        $message->setDateMessage($result['me_date_message']);
         $membre = new Membre();
         $membre->setId($result['m_id']);
         $membre->setNom($result['m_nom']);

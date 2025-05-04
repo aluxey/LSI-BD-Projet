@@ -20,7 +20,7 @@ class ForumEvenementRepository extends ServiceEntityRepository
     /**
      * @return ForumEvenement Returns the Evenement objects
      */
-    public function findByEvenementIdField($id): array
+    public function findByEvenementIdField($id): ForumEvenement
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -32,15 +32,14 @@ class ForumEvenementRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
 
-        // $results = $resultSet->fetchAllAssociative();
         $result = $resultSet->fetchAssociative();
 
         // Création de l'objet Evenement
-        $evenement = new ForumEvenement();
-        $evenement->setId($result['fe_id']);
-        $evenement->setTitre($result['fe_titre']);
+        $forumEvenements = new ForumEvenement();
+        $forumEvenements->setId($result['fe_id']);
+        $forumEvenements->setTitre($result['fe_titre']);
         
-        return $evenement;
+        return $forumEvenements;
     }
 
     /**

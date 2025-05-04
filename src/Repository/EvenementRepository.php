@@ -75,6 +75,10 @@ class EvenementRepository extends ServiceEntityRepository
         // $results = $resultSet->fetchAllAssociative();
         $result = $resultSet->fetchAssociative();
 
+        if (!$result) {
+            return null;
+        }
+
         // Création de l'objet Evenement
         $evenement = new Evenement();
         $evenement->setId($result['e_id']);

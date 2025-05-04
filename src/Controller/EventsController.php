@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Repository\EvenementRepository;
 use App\Repository\ForumEvenementRepository;
+use App\Repository\ProjetRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,11 +23,11 @@ final class EventsController extends AbstractController
     
 
     #[Route('/event/{id}', name: 'app_event_show', requirements: ['id' => '\d+'])]
-    public function show(int $id, EvenementRepository $evenementRepository, ForumEvenementRepository $forumEvenementRepository): Response
+    public function show(int $id, EvenementRepository $evenementRepository, ForumEvenementRepository $forumEvenementRepository, ProjetRepository $projetRepository): Response
     {
         $event = $evenementRepository->findOneByIdField($id);
         $membres = $projetRepository->findMembresByProjetId($id);
-        $forums = $forumEvenementRepository->findByProjetIdField($id);
+        $forums = $forumEvenementRepository->findByEvenementIdField($id);
         return $this->render('events/show.html.twig', [
             'event' => $event,
             'membres' => $membres,
